@@ -16,4 +16,4 @@ Script to display basic information about the computer to which you are logging 
  - Home directory path
  - Weather
 
-I will be working to move this from a shell script to a C program and add it to the Ubuntu repositories.
+I will be working to move this from a shell script to a Java or C program and add it to the Ubuntu repositories if I can.
