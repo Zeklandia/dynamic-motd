@@ -30,7 +30,7 @@ PROLIMIT=`ulimit -u`
 USERDIR=`echo ~`
 WLOC=`weather $ZIP | awk 'NR==1' | awk '{print $4}'`
 WTEMP=`weather $ZIP | awk 'NR==3' | awk '{print $2}'`
-WCOND=`weather $ZIP | awk 'NR==6' | awk '{print substr($0, index($0,$3))}'`
+WCOND=`weather $ZIP | awk 'NR==6' | cut -d: -f2 | cut -c2-`
 
 echo "Done!"
 reset
@@ -102,6 +102,6 @@ echo -e "\033[0;36m:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=[ \033[1;31mSystem Stats \033
 \033[0;36m:=:=:=:=:=:=:=:=:=:=:=:=:=:[ \033[1;31mInternet Weather Stats \033[0;36m]:=:=:=:=:=:=:=:=:=:=:=:=:=:
 \033[0;36m:  \033[1;37mLocation \033[0;36m= \033[1;32m$WLOC, $ZIP
 \033[0;36m:      \033[1;37mTemp \033[0;36m= \033[1;32m$WTEMP \u00b0F
-\033[0;36m:       \033[1;37mSky \033[0;36m= \033[1;32m$WCOND
+\033[0;36m:   \033[1;37mWeather \033[0;36m= \033[1;32m$WCOND
 \033[0;36m:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:[]:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:
 \033[0;0m"
