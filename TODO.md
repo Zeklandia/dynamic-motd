@@ -1,4 +1,5 @@
 TO-DO:
 
- - Merge scripts
- - Rewrite in Java or C
+ - Merge scripts and their banners
+ - Work on Java version
+ - Work on C version
