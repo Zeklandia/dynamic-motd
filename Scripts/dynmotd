@@ -2,7 +2,16 @@
 
 reset
 
+# Load information and settings
+
+echo "Loading..."
 BASEDIR=$(dirname $0)
+CONFIGFILE=~/.config/dynmotd.conf
+if [ ! -f $CONFIGFILE ];
+then
+    echo -e "# Set options for main script\n# ZIP Code (For weather)\nZIP=11234\n# Print banner (1=yes, 0=no)\nPRINTBAN=1\nBANNER=BANLINUX" >>$CONFIGFILE
+fi
+source $CONFIGFILE
 TIME=`date`
 HOST=`hostname`
 WIFIADDR=`ifconfig wlan0 | grep 'inet addr:' | cut -d: -f2 | awk '{ print $1}'`
@@ -15,19 +24,26 @@ LASTLOGIN=`last -n 2 -R $USER | awk 'NR==2'`
 PROCOUNT=`ps -Afl | wc -l`
 PROLIMIT=`ulimit -u`
 USERDIR=`echo ~`
-ZIP=`cat $BASEDIR/zip`
 WLOC=`weather $ZIP | awk 'NR==1' | awk '{print $4}'`
 WTEMP=`weather $ZIP | awk 'NR==3' | awk '{print $2}'`
 WCOND=`weather $ZIP | awk 'NR==6' | awk '{print substr($0, index($0,$3))}'`
 
-echo -e "\033[1;37m __       __   __   __   __    __  ___   ___
+echo "Done!"
+reset
+
+#Begin Driplay
+
+if [[ $PRINTBAN == 1 ]]
+then
+    echo -e "\033[1;37m __       __   __   __   __    __  ___   ___
 |  |     |  | |  \ |  | |  |  |  | \  \ /  /
 |  |     |  | |   \|  | |  |  |  |  \  \u203e  /
 |  |____ |  | |  . .  | |  |  |  |   >   <
 |       ||  | |  |\   | |  |__|  |  /  _  \ 
 |_______||__| |__| \__|  \______/  /__/ \__\ 
-
-\033[0;36m:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=[ \033[1;31mSystem Stats \033[0;36m]=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:
+"
+fi
+echo -e "\033[0;36m:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=[ \033[1;31mSystem Stats \033[0;36m]=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:
 \033[0;36m: \033[1;37mDate/Time \033[0;36m= \033[1;32m$TIME
 \033[0;36m:  \033[1;37mHostname \033[0;36m= \033[1;32m$HOST
 \033[0;36m:   \033[1;37mWLAN IP \033[0;36m= \033[1;32m$WIFIADDR
@@ -41,7 +57,7 @@ echo -e "\033[1;37m __       __   __   __   __    __  ___   ___
 \033[0;36m: \033[1;37mProcesses \033[0;36m= \033[1;32m$PROCOUNT of $PROLIMIT
 \033[0;36m:      \033[1;37mHome \033[0;36m= \033[1;32m$USERDIR
 \033[0;36m:=:=:=:=:=:=:=:=:=:=:=:=:=:[ \033[1;31mInternet Weather Stats \033[0;36m]:=:=:=:=:=:=:=:=:=:=:=:=:=:
-\033[0;36m:  \033[1;37mLocation \033[0;36m= \033[1;32m$WLOC
+\033[0;36m:  \033[1;37mLocation \033[0;36m= \033[1;32m$ZIP, $WLOC
 \033[0;36m:      \033[1;37mTemp \033[0;36m= \033[1;32m$WTEMP \u00b0F
 \033[0;36m:       \033[1;37mSky \033[0;36m= \033[1;32m$WCOND
 \033[0;36m:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:[]:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:
