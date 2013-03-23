@@ -1,4 +1,4 @@
-Linux-Login-Info-Script
+Login-Info-Script
 =======================
 
 Script to display basic information about the computer to which you are logging in, when you log in.
