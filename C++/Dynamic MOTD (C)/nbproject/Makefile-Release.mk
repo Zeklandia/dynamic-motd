@@ -60,7 +60,7 @@ LDLIBSOPTIONS=
 
 ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/dynamic_motd__c_: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
-	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/dynamic_motd__c_ ${OBJECTFILES} ${LDLIBSOPTIONS} 
+	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/dynamic_motd__c_ ${OBJECTFILES} ${LDLIBSOPTIONS}
 
 ${OBJECTDIR}/dynmotd.o: dynmotd.cpp 
 	${MKDIR} -p ${OBJECTDIR}
