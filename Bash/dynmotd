@@ -40,7 +40,7 @@ reset
 
 if [[ $PRINTBAN == 1 ]]
 then
-    if [[ $CUSTBAN == 1 ]]
+    if [[ $BANNER == 1 ]]
     then
         echo -e $CUSTBANTEXT
     fi
