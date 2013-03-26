@@ -13,7 +13,7 @@ then
 fi
 if [ ! -f $CONFIGFILE ];
 then
-    echo -e "# Set options for main script\n# ZIP Code (For weather)\nZIP=11234\n# Print banner (1=yes, 0=no)\nPRINTBAN=1\n# Print a custom banner (1=yes, 0=no)\nCUSTBAN=0\nCUSTBANTEXT=""\n# Which banner to print (BANLINUX, BANLINUXBIG, BANUBUNTU, BANANDROID, or BANMACOSX)\nBANNER=BANLINUX" >>$CONFIGFILE
+    echo -e "# Set options for main script\n# ZIP Code (For weather)\nZIP=11234\n# Print banner (1=yes, 0=no)\nPRINTBAN=1\n# Print a custom banner (1=yes, 0=no)\nCUSTBAN=0\n# Text to be displayed in custom banner (backticks and \ escapes are allowed, use \n to end a line)\nCUSTBANTEXT=""\n# Which banner to print (BANLINUX, BANLINUXBIG, BANUBUNTU, BANANDROID, or BANMACOSX)\nBANNER=BANLINUX" >>$CONFIGFILE
 fi
 source $CONFIGFILE
 TIME=`date`
@@ -40,10 +40,11 @@ reset
 
 if [[ $PRINTBAN == 1 ]]
 then
-    if [[ $BANNER == 1 ]]
+    if [[ $CUSTBAN == 1 ]]
     then
         echo -e $CUSTBANTEXT
-    fi
+    else
+
     if [[ $BANNER == BANLINUXBIG ]]
     then
         echo -e "\033[1;37m __       __   __   __   __    __  ___   ___
@@ -54,6 +55,7 @@ then
 |_______||__| |__| \__|  \______/  /__/ \__\ 
 "
     fi
+
     if [[ $BANNER == BANUBUNTU ]]
     then
         echo -e "\033[1;37m   __  ____                __
@@ -63,6 +65,7 @@ then
 \____/_____/\____/_/ /_/\__/\____/
 "
     fi
+
     if [[ $BANNER == BANLINUX ]]
     then
         echo -e "\033[1;37m    __    _
@@ -72,6 +75,7 @@ then
 /_____/_/_/ /_/\____//_/\_\ 
 "
     fi
+
     if [[ $BANNER == BANANDROID ]]
     then
         echo -e "\033[1;37m    ___              __           __    __
@@ -81,6 +85,7 @@ then
 /_/  |_/_/ /_/\____/_/   \____/_/\____/
 "
     fi
+
     if [[ $BANNER == BANMACOSX ]]
     then
         echo -e "\033[1;37m    __  ___              ____  _____    _  __
@@ -89,6 +94,7 @@ then
  / /  / / /_/ / /__   / /_/ /___/ /   /   |
 /_/  /_/\____/\___/   \____//____/   /_/|_|
 "
+    fi
     fi
 fi
 echo -e "\033[0;36m:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=[ \033[1;31mSystem Stats \033[0;36m]=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:
