@@ -1,11 +1,31 @@
 package com.zekfed.desktop.tools;
 
-public class dynmotd {
-     public static void main(String[] args) {
+import java.io.File;
+import java.io.IOException;
+import jcurses.system.Toolkit;
+import org.fusesource.jansi.AnsiConsole;
 
-          System.out.println(((char) 27)+"[2J");
+public class dynmotd {
+     public static void main(String[] args) throws IOException {
+
+          Runtime runTime = Runtime.getRuntime();
+          Toolkit.clearScreen(null);
+          String userHome = System.getProperty("user.home");
           System.out.println("Loading...");
-  /*
+          File folder = new File(userHome + "/.config");
+          if(folder.exists()){
+          File configFile = new File(userHome + "/.config/dynmotd.conf");
+          if(configFile.exists()) {}
+          }
+          else{
+          boolean wasDirectoryMade = folder.mkdirs();
+          if(wasDirectoryMade);
+          else
+               System.out.println("Error creating configuration. Is your home foler mounted R/W?");
+          }
+
+
+          /*
      BASEDIR=$(dirname $0)
 CONFIGFILE=~/.config/dynmotd.conf
 if [ ! -d ~/.config ];

@@ -5,7 +5,6 @@ reset
 # Load information and settings
 
 echo "Loading..."
-BASEDIR=$(dirname $0)
 CONFIGFILE=~/.config/dynmotd.conf
 if [ ! -d ~/.config ];
 then
