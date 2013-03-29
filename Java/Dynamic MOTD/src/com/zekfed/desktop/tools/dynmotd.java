@@ -10,8 +10,9 @@ public class dynmotd {
 
           Runtime runTime = Runtime.getRuntime();
           Toolkit.clearScreen(null);
-          String userHome = System.getProperty("user.home");
           System.out.println("Loading...");
+
+          String userHome = System.getProperty("user.home");
           File folder = new File(userHome + "/.config");
           if(folder.exists()){
           File configFile = new File(userHome + "/.config/dynmotd.conf");
@@ -26,16 +27,6 @@ public class dynmotd {
 
 
           /*
-     BASEDIR=$(dirname $0)
-CONFIGFILE=~/.config/dynmotd.conf
-if [ ! -d ~/.config ];
-then
-    mkdir ~/.config
-fi
-if [ ! -f $CONFIGFILE ];
-then
-    echo -e "# Set options for main script\n# ZIP Code (For weather)\nZIP=11234\n# Print banner (1=yes, 0=no)\nPRINTBAN=1\n# Which banner to print (BANLINUX, BANLINUXBIG, BANUBUNTU, BANANDROID, or BANMACOSX)\nBANNER=BANLINUX" >>$CONFIGFILE
-fi
 source $CONFIGFILE
 TIME=`date`
 HOST=`hostname`
