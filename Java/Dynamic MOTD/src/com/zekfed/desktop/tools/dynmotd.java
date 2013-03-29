@@ -26,7 +26,7 @@ public class dynmotd {
           }
 
 
-          /*
+/*
 source $CONFIGFILE
 TIME=`date`
 HOST=`hostname`
@@ -39,7 +39,6 @@ USER=`whoami`
 LASTLOGIN=`last -n 2 -R $USER | awk 'NR==2'`
 PROCOUNT=`ps -Afl | wc -l`
 PROLIMIT=`ulimit -u`
-USERDIR=`echo ~`
 WLOC=`weather $ZIP | grep 'Current conditions at' | awk '{print $4}'`
 WTEMP=`weather $ZIP | grep 'Temperature:' | awk '{print $2}'`
 WCOND=`weather $ZIP | grep 'Weather:' | cut -d: -f2 | cut -c2-`
