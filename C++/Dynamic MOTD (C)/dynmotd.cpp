@@ -6,28 +6,72 @@
  */
 
 #include <iostream>
+#include <string>
+#include <stdio.h>
+#include <cstdlib>
+using namespace std;
 
 int main()
 {
+     std::cout << "Loading...\n";
+     system("clear");
+
+     string time;
+     time = "Time";
+     string host;
+     host = "Host name";
+     string wlanip;
+     wlanip = "WLAN IP";
+     string lanip;
+     lanip = "LAN IP";
+     string kernelver;
+     kernelver = "Kernel version";
+     string memsize;
+     memsize = "RAM size";
+     string stats;
+     stats = "Stats";
+     string user;
+     user = "Username";
+     string last;
+     last = "Last login";
+     string proccount;
+     proccount = "Process count";
+     string proclimit;
+     proclimit = "Process limit";
+     string homedir;
+     homedir = "Home directory";
+     string wloc;
+     wloc = "Weather location";
+     string zip;
+     zip = "ZIP code";
+     string wtemp;
+     wtemp = "Temperature";
+     string wcond;
+     wcond = "Weather conditions";
+     string wsky;
+     wsky = "Sky conditions";
+
+     std::cout << "Done!\n";
+     system("clear");
 
      std::cout << ":=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=[ " << "System Stats" << " ]=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:\n"
-             ":   Date/Time = " << TIME << "\n"
-             ":    Hostname = " << HOST << "\n"
-             ":     WLAN IP = " << WLANIP << "\n"
-             ":      LAN IP = " << LANIP << "\n"
-             ":      Kernel = " << KERNELVER << "\n"
-             ":      Memory = "<< MEMSIZE << "kB\n"
-             ":       Stats = " << STATS << "\n"
+             ":   Date/Time = " << time << "\n"
+             ":    Hostname = " << host << "\n"
+             ":     WLAN IP = " << wlanip << "\n"
+             ":      LAN IP = " << lanip << "\n"
+             ":      Kernel = " << kernelver << "\n"
+             ":      Memory = "<< memsize << "kB\n"
+             ":       Stats = " << stats << "\n"
              ":=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:[ " << "User Stats" << " ]:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:\n"
-             ":    Username = " << USER << "\n"
-             ":  Last Login = " << LAST << "\n"
-             ":   Processes = " << PROCCOUNT << " of " << PROCLIMIT << "\n"
-             ":        Home = " << HOME << "\n"
-             ":=:=:=:=:=:=:=:=:=:=:=:=:=:[ " << "Internet Weather Stats" <<" ]:=:=:=:=:=:=:=:=:=:=:=:=:=:\n"
-             ":    Location = " << WLOC << ", " << ZIP << "\n"
-             ":        Temp = " << WTEMP << "\n"
-             ":     Weather = " << WCOND << "\n"
-             ":         Sky = " << WSKY << "\n"
+             ":    Username = " << user << "\n"
+             ":  Last Login = " << last << "\n"
+             ":   Processes = " << proccount << " of " << proclimit << "\n"
+             ":        Home = " << homedir << "\n"
+             ":=:=:=:=:=:=:=:=:=:=:=:=:=:[ " << "Internet Weather Stats" << " ]:=:=:=:=:=:=:=:=:=:=:=:=:=:\n"
+             ":    Location = " << wloc << ", " << zip << "\n"
+             ":        Temp = " << wtemp << "\n"
+             ":     Weather = " << wcond << "\n"
+             ":         Sky = " << wsky << "\n"
              ":=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:[]:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:";
      return 0;
      /*
