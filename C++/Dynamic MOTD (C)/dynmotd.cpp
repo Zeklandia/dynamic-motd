@@ -9,6 +9,7 @@
 #include <arpa/inet.h>
 #include <fstream>
 #include <unistd.h>
+#include <sys/utsname.h>
 
 using namespace std;
 
@@ -16,7 +17,7 @@ int main()
 {
      std::cout << "Loading...\n";
      system("clear");
-
+     system("source" << getenv("HOME") << "/.config/dynmotd.conf");
      time_t rawtime;
      struct tm * timeinfo;
      time (&rawtime);
@@ -26,27 +27,27 @@ int main()
      char hostname[128];
      gethostname(hostname, sizeof hostname);
      string wlanip;
-     wlanip = "WLAN IP";
+     wlanip = system("ifconfig wlan0 | grep 'inet addr:' | cut -d: -f2 | awk '{ print $1}'");
      string lanip;
-     lanip = "LAN IP";
+     lanip = system("ifconfig eth0 | grep 'inet addr:' | cut -d: -f2 | awk '{ print $1}'");
      string kernelver;
-     kernelver = "Kernel version";
+     kernelver = system("uname -r");
      string memsize;
-     memsize = "RAM size";
+     memsize = system("cat /proc/meminfo | grep MemTotal | awk {'print $2'}");
      string stats;
-     stats = "Stats";
+     stats = system("w");
      string user;
      user = getenv("USER");
      string last;
-     last = "Last login";
+     last = system("last -n 2 -R $USER | awk 'NR==2'");
      string homedir;
      homedir = getenv("HOME");
      string proccount;
-     proccount = "Process count";
+     proccount = system("ps -Afl | wc -l");
      string proclimit;
-     proclimit = "Process limit";
+     proclimit = system("cat /proc/meminfo | grep MemTotal | awk {'print $2'}");
      string wloc;
-     wloc = "Weather location";
+     wloc = system("weather $ZIP | grep 'Current conditions at' | awk '{print $4}'");
      string zip;
      zip = "ZIP code";
      string wtemp;
@@ -55,7 +56,6 @@ int main()
      wcond = "Weather conditions";
      string wsky;
      wsky = "Sky conditions";
-
      std::cout << "Done!\n";
      system("clear");
 
