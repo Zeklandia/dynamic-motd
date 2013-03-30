@@ -12,11 +12,11 @@ then
 fi
 if [ ! -f $CONFIGFILE ];
 then
-    echo -e "# Set options for main script\n# ZIP Code (For weather)\nZIP=11234\n# Print banner (1=yes, 0=no)\nPRINTBAN=1\n# Print a custom banner (1=yes, 0=no)\nCUSTBAN=0\n# Text to be displayed in custom banner (backticks and \ escapes are allowed, use \n to end a line)\nCUSTBANTEXT=""\n# Which banner to print (BANLINUX, BANLINUXBIG, BANUBUNTU, BANANDROID, or BANMACOSX)\nBANNER=BANLINUX" >>$CONFIGFILE
+    echo -e "# Set options for main script\n# ZIP Code (For weather)\nZIP=11234\n# Print banner (1=yes, 0=no)\nPRINTBAN=1\n# Print a custom banner (1=yes, 0=no)\nCUSTBAN=0\n# Text to be displayed in custom banner (backticks and \ escapes are allowed, use \ n without the space to end a line)\nCUSTBANTEXT=""\n# Which banner to print (BANLINUX, BANLINUXBIG, BANUBUNTU, BANANDROID, or BANMACOSX)\nBANNER=BANLINUX\n# Print weather information (1=yes, 0=no)\nWEATHER=1" >>$CONFIGFILE
 fi
 if [ ! -f /usr/bin/dynmotd ];
 then
-    ln -s /usr/local/bin/dynmotd /usr/bin/
+    ln -s "/usr/local/bin/dynmotd" "/usr/bin/"
 fi
 source $CONFIGFILE
 TIME=`date`
@@ -31,10 +31,13 @@ LASTLOGIN=`last -n 2 -R $USER | awk 'NR==2'`
 HOMEDIR=`echo ~`
 PROCCOUNT=`ps -Afl | wc -l`
 PROCLIMIT=`ulimit -u`
-WLOC=`weather $ZIP | grep 'Current conditions at' | awk '{print $4}'`
-WTEMP=`weather $ZIP | grep 'Temperature:' | awk '{print $2}'`
-WCOND=`weather $ZIP | grep 'Weather:' | cut -d: -f2 | cut -c2-`
-WSKY=`weather $ZIP | grep 'Sky conditions:' | cut -d: -f2 | cut -c2-`
+if [[ $WEATHER == 1 ]]
+then
+    WLOC=`weather $ZIP | grep 'Current conditions at' | awk '{print $4}'`
+    WTEMP=`weather $ZIP | grep 'Temperature:' | awk '{print $2}'`
+    WCOND=`weather $ZIP | grep 'Weather:' | cut -d: -f2 | cut -c2-`
+    WSKY=`weather $ZIP | grep 'Sky conditions:' | cut -d: -f2 | cut -c2-`
+fi
 
 echo "Done!"
 reset
@@ -112,11 +115,17 @@ echo -e "\033[0;36m:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=[ \033[1;31mSystem Stats \033
 \033[0;36m:    \033[1;37mUsername \033[0;36m= \033[1;32m$USER
 \033[0;36m:  \033[1;37mLast Login \033[0;36m= \033[1;32m$LASTLOGIN
 \033[0;36m:        \033[1;37mHome \033[0;36m= \033[1;32m$HOMEDIR
-\033[0;36m:   \033[1;37mProcesses \033[0;36m= \033[1;32m$PROCCOUNT of $PROCLIMIT
-\033[0;36m:=:=:=:=:=:=:=:=:=:=:=:=:=:[ \033[1;31mInternet Weather Stats \033[0;36m]:=:=:=:=:=:=:=:=:=:=:=:=:=:
+\033[0;36m:   \033[1;37mProcesses \033[0;36m= \033[1;32m$PROCCOUNT of $PROCLIMIT"
+if [[ $WEATHER == 1 ]]
+then
+    echo -e "\033[0;36m:=:=:=:=:=:=:=:=:=:=:=:=:=:[ \033[1;31mInternet Weather Stats \033[0;36m]:=:=:=:=:=:=:=:=:=:=:=:=:=:
 \033[0;36m:    \033[1;37mLocation \033[0;36m= \033[1;32m$WLOC, $ZIP
 \033[0;36m:        \033[1;37mTemp \033[0;36m= \033[1;32m$WTEMP \u00b0F
 \033[0;36m:     \033[1;37mWeather \033[0;36m= \033[1;32m$WCOND
 \033[0;36m:         \033[1;37mSky \033[0;36m= \033[1;32m$WSKY
 \033[0;36m:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:[]:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:
 \033[0;0m"
+else
+    echo -e "\033[0;36m:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:[]:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:
+\033[0;0m"
+fi
