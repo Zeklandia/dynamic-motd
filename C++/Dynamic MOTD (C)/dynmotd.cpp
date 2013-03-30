@@ -40,7 +40,7 @@ int main()
      string last;
      last = "Last login";
      string homedir;
-     homedir = "Home directory";
+     homedir = getenv("HOME");
      string proccount;
      proccount = "Process count";
      string proclimit;
