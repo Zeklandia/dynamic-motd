@@ -51,7 +51,7 @@ int main()
      string wloc;
      wloc = system("weather $ZIP | grep 'Current conditions at' | awk '{print $4}'");
      string zip;
-     zip = system("echo $ZIP");
+     zip = system("$ZIP");
      string wtemp;
      wtemp = "Temperature";
      string wcond;
