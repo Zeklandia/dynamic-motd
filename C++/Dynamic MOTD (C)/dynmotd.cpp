@@ -39,12 +39,12 @@ int main()
      user = getenv("USER");
      string last;
      last = "Last login";
+     string homedir;
+     homedir = "Home directory";
      string proccount;
      proccount = "Process count";
      string proclimit;
      proclimit = "Process limit";
-     string homedir;
-     homedir = "Home directory";
      string wloc;
      wloc = "Weather location";
      string zip;
@@ -70,8 +70,8 @@ int main()
              ":=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:[ " << "User Stats" << " ]:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:\n"
              ":    Username = " << user << "\n"
              ":  Last Login = " << last << "\n"
-             ":   Processes = " << proccount << " of " << proclimit << "\n"
              ":        Home = " << homedir << "\n"
+             ":   Processes = " << proccount << " of " << proclimit << "\n"
              ":=:=:=:=:=:=:=:=:=:=:=:=:=:[ " << "Internet Weather Stats" << " ]:=:=:=:=:=:=:=:=:=:=:=:=:=:\n"
              ":    Location = " << wloc << ", " << zip << "\n"
              ":        Temp = " << wtemp << "\n"

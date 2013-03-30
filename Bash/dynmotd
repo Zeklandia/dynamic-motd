@@ -24,9 +24,9 @@ USERSTATS=`w`
 MEMSIZE=`cat /proc/meminfo | grep MemTotal | awk {'print $2'}`
 USER=`whoami`
 LASTLOGIN=`last -n 2 -R $USER | awk 'NR==2'`
+USERDIR=`echo ~`
 PROCCOUNT=`ps -Afl | wc -l`
 PROCLIMIT=`ulimit -u`
-USERDIR=`echo ~`
 WLOC=`weather $ZIP | grep 'Current conditions at' | awk '{print $4}'`
 WTEMP=`weather $ZIP | grep 'Temperature:' | awk '{print $2}'`
 WCOND=`weather $ZIP | grep 'Weather:' | cut -d: -f2 | cut -c2-`
@@ -107,8 +107,8 @@ echo -e "\033[0;36m:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=[ \033[1;31mSystem Stats \033
 \033[0;36m:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:[ \033[1;31mUser Stats \033[0;36m]:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:
 \033[0;36m:    \033[1;37mUsername \033[0;36m= \033[1;32m$USER
 \033[0;36m:  \033[1;37mLast Login \033[0;36m= \033[1;32m$LASTLOGIN
-\033[0;36m:   \033[1;37mProcesses \033[0;36m= \033[1;32m$PROCCOUNT of $PROCLIMIT
 \033[0;36m:        \033[1;37mHome \033[0;36m= \033[1;32m$USERDIR
+\033[0;36m:   \033[1;37mProcesses \033[0;36m= \033[1;32m$PROCCOUNT of $PROCLIMIT
 \033[0;36m:=:=:=:=:=:=:=:=:=:=:=:=:=:[ \033[1;31mInternet Weather Stats \033[0;36m]:=:=:=:=:=:=:=:=:=:=:=:=:=:
 \033[0;36m:    \033[1;37mLocation \033[0;36m= \033[1;32m$WLOC, $ZIP
 \033[0;36m:        \033[1;37mTemp \033[0;36m= \033[1;32m$WTEMP \u00b0F
