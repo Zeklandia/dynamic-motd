@@ -1,10 +1,3 @@
-/*
- * File:   dynmotd.cpp
- * Author: asher
- *
- * Created on March 23, 2013, 1:18 PM
- */
-
 #include <iostream>
 #include <string>
 #include <stdio.h>
@@ -16,6 +9,7 @@
 #include <arpa/inet.h>
 #include <fstream>
 #include <unistd.h>
+
 using namespace std;
 
 int main()
@@ -42,7 +36,7 @@ int main()
      string stats;
      stats = "Stats";
      string user;
-     user = "Username";
+     user = getenv("USER");
      string last;
      last = "Last login";
      string proccount;
