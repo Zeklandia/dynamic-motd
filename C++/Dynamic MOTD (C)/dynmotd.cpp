@@ -5,14 +5,12 @@
  * Created on March 23, 2013, 1:18 PM
  */
 
-#include <cstdlib>
 #include <iostream>
 
-using namespace std;
+int main()
+{
 
-int main(int argc, char** argv) {
-
-     std::cout >> "derp";
+     std::cout << "derp";
      return 0;
      /*
       #!/bin/bash
