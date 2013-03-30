@@ -12,6 +12,7 @@ To-Do
     - process limit
     - home directory
     - all weather functions
+    - Banners
     - Print colors
     - Print bold text
  - Work on Java version
