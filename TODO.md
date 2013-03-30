@@ -2,6 +2,7 @@ Project To-Do List
 =======================
 
  - Work on C++ version
+    - Fix printing of system() calls while loading
     - IP adresses
     - Kernel Version
     - RAM size
