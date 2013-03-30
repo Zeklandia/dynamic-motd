@@ -17,7 +17,7 @@ int main()
 {
      std::cout << "Loading...\n";
      system("clear");
-     system("source" << getenv("HOME") << "/.config/dynmotd.conf");
+     system("source $HOME/.config/dynmotd.conf");
      time_t rawtime;
      struct tm * timeinfo;
      time (&rawtime);
