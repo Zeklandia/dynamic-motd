@@ -10,6 +10,13 @@
 #include <stdio.h>
 #include <cstdlib>
 #include <time.h>
+#include <netdb.h>
+#include <sys/param.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
+#include <fstream>
+#include <unistd.h>
+#include <sys/types.h>
 using namespace std;
 
 int main()
@@ -24,7 +31,7 @@ int main()
      string datetime;
      datetime = asctime(timeinfo);
      string host;
-     host = "Host name";
+     host = int gethostname(char * name, int maxlen);
      string wlanip;
      wlanip = "WLAN IP";
      string lanip;
@@ -60,7 +67,7 @@ int main()
      system("clear");
 
      std::cout << ":=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=[ " << "System Stats" << " ]=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:\n"
-             ":   Date/Time = " << datetime << "\n"
+             ":   Date/Time = " << datetime << ""
              ":    Hostname = " << host << "\n"
              ":     WLAN IP = " << wlanip << "\n"
              ":      LAN IP = " << lanip << "\n"
