@@ -17,7 +17,7 @@ int main()
      system("clear");
 
      string time;
-     time = "Time";
+     time = "Time and date";
      string host;
      host = "Host name";
      string wlanip;
