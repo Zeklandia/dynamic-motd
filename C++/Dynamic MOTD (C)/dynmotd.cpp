@@ -16,7 +16,6 @@
 #include <arpa/inet.h>
 #include <fstream>
 #include <unistd.h>
-#include <sys/types.h>
 using namespace std;
 
 int main()
@@ -30,8 +29,8 @@ int main()
      timeinfo = localtime (&rawtime);
      string datetime;
      datetime = asctime(timeinfo);
-     string host;
-     host = int gethostname(char * name, int maxlen);
+     char hostname[128];
+     gethostname(hostname, sizeof hostname);
      string wlanip;
      wlanip = "WLAN IP";
      string lanip;
@@ -68,7 +67,7 @@ int main()
 
      std::cout << ":=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=[ " << "System Stats" << " ]=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:\n"
              ":   Date/Time = " << datetime << ""
-             ":    Hostname = " << host << "\n"
+             ":    Hostname = " << hostname << "\n"
              ":     WLAN IP = " << wlanip << "\n"
              ":      LAN IP = " << lanip << "\n"
              ":      Kernel = " << kernelver << "\n"
