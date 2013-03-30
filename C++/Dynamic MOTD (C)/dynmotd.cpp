@@ -9,6 +9,7 @@
 #include <string>
 #include <stdio.h>
 #include <cstdlib>
+#include <time.h>
 using namespace std;
 
 int main()
@@ -16,8 +17,12 @@ int main()
      std::cout << "Loading...\n";
      system("clear");
 
-     string time;
-     time = "Time and date";
+     time_t rawtime;
+     struct tm * timeinfo;
+     time (&rawtime);
+     timeinfo = localtime (&rawtime);
+     string datetime;
+     datetime = asctime(timeinfo);
      string host;
      host = "Host name";
      string wlanip;
@@ -55,7 +60,7 @@ int main()
      system("clear");
 
      std::cout << ":=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=[ " << "System Stats" << " ]=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:\n"
-             ":   Date/Time = " << time << "\n"
+             ":   Date/Time = " << datetime << "\n"
              ":    Hostname = " << host << "\n"
              ":     WLAN IP = " << wlanip << "\n"
              ":      LAN IP = " << lanip << "\n"
