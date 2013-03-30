@@ -10,7 +10,25 @@
 int main()
 {
 
-     std::cout << ":=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=[ " << "System Stats" << " ]=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:\n:   Date/Time = " << TIME << "\n:    Hostname = " << HOST << "\n:     WLAN IP = " << WLANIP << "\n:      LAN IP = " << LANIP << "\n:      Kernel = " << KERNELVER << "\n:      Memory = "<< MEMSIZE << "kB\n:       Stats = " << STATS << "\n:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:[ " << "User Stats" << " ]:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:\n:    Username = " << USER << "\n:  Last Login = " << LAST << "\n:   Processes = " << PROCCOUNT << " of " << PROCLIMIT << "\n:        Home = " << HOME << "\n:=:=:=:=:=:=:=:=:=:=:=:=:=:[ " << "Internet Weather Stats" <<" ]:=:=:=:=:=:=:=:=:=:=:=:=:=:\n:    Location = " << WLOC << ", " << ZIP << "\n:        Temp = " << WTEMP << "\n:     Weather = " << WCOND << "\n:         Sky = " << WSKY << "\n:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:[]:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:";
+     std::cout << ":=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=[ " << "System Stats" << " ]=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:\n"
+             ":   Date/Time = " << TIME << "\n"
+             ":    Hostname = " << HOST << "\n"
+             ":     WLAN IP = " << WLANIP << "\n"
+             ":      LAN IP = " << LANIP << "\n"
+             ":      Kernel = " << KERNELVER << "\n"
+             ":      Memory = "<< MEMSIZE << "kB\n"
+             ":       Stats = " << STATS << "\n"
+             ":=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:[ " << "User Stats" << " ]:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:\n"
+             ":    Username = " << USER << "\n"
+             ":  Last Login = " << LAST << "\n"
+             ":   Processes = " << PROCCOUNT << " of " << PROCLIMIT << "\n"
+             ":        Home = " << HOME << "\n"
+             ":=:=:=:=:=:=:=:=:=:=:=:=:=:[ " << "Internet Weather Stats" <<" ]:=:=:=:=:=:=:=:=:=:=:=:=:=:\n"
+             ":    Location = " << WLOC << ", " << ZIP << "\n"
+             ":        Temp = " << WTEMP << "\n"
+             ":     Weather = " << WCOND << "\n"
+             ":         Sky = " << WSKY << "\n"
+             ":=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:[]:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:";
      return 0;
      /*
       #!/bin/bash
