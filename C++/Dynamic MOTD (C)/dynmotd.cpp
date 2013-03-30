@@ -17,7 +17,7 @@ int main()
 {
      std::cout << "Loading...\n";
      system("clear");
-     system("source $HOME/.config/dynmotd.conf");
+     system("bash source $HOME/.config/dynmotd.conf");
      time_t rawtime;
      struct tm * timeinfo;
      time (&rawtime);
@@ -30,8 +30,10 @@ int main()
      wlanip = system("ifconfig wlan0 | grep 'inet addr:' | cut -d: -f2 | awk '{ print $1}'");
      string lanip;
      lanip = system("ifconfig eth0 | grep 'inet addr:' | cut -d: -f2 | awk '{ print $1}'");
+     struct utsname u;
+     uname(&u);
      string kernelver;
-     kernelver = system("uname -r");
+     kernelver = u.release;
      string memsize;
      memsize = system("cat /proc/meminfo | grep MemTotal | awk {'print $2'}");
      string stats;
@@ -49,7 +51,7 @@ int main()
      string wloc;
      wloc = system("weather $ZIP | grep 'Current conditions at' | awk '{print $4}'");
      string zip;
-     zip = "ZIP code";
+     zip = system("echo $ZIP");
      string wtemp;
      wtemp = "Temperature";
      string wcond;
