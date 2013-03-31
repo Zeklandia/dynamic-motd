@@ -28,7 +28,7 @@ if [[ $FULLW == 1 ]]
 then
     USERSTATS=`w`
 else
-    USERSTATS=`w | awk 'NR==1'`
+    USERSTATS=`w | awk 'NR==1' | cut -c2-`
 fi
 MEMSIZE=`cat /proc/meminfo | grep MemTotal | awk {'print $2'}`
 USER=`whoami`
