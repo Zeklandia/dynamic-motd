@@ -38,6 +38,7 @@ int main()
      fi
      source $CONFIGFILE
      */
+     //Also need to link this file to /usr/bin/dynmotd-c
 
      //Set colors
      string color_default;
