@@ -39,6 +39,26 @@ int main()
      source $CONFIGFILE
      */
 
+     //Set colors
+     string color_default;
+     color_default = "\033[0m";
+     string white;
+     white = "\033[0;37m";
+     string white_bold;
+     white_bold = "\033[1;37m";
+     string cyan;
+     cyan = "\033[0;36m";
+     string cyan_bold;
+     cyan_bold = "\033[1;36m";
+     string red;
+     red = "\033[0;31m";
+     string red_bold;
+     red_bold = "\033[1;31m";
+     string green;
+     green = "\033[0;32m";
+     string green_bold;
+     green_bold = "\033[1;32m";
+
      //Get time
      time_t rawtime;
      time ( &rawtime );
@@ -137,25 +157,26 @@ int main()
      system("clear");
 
      //Print the loaded information
-     std::cout << ":=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=[ " << "System Stats" << " ]=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:\n"
-             ":   Date/Time = " << datetime << ""
-             ":    Hostname = " << hostname << "\n"
-             ":     WLAN IP = " << wlanip << "\n"
-             ":      LAN IP = " << lanip << "\n"
-             ":      Kernel = " << kernelver << "\n"
-             ":      Memory = "<< memsize << "kB\n"
-             ":       Stats = " << stats << "\n"
-             ":=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:[ " << "User Stats" << " ]:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:\n"
-             ":    Username = " << user << "\n"
-             ":  Last Login = " << last << "\n"
-             ":        Home = " << homedir << "\n"
-             ":   Processes = " << proccount << " of " << proclimit << "\n"
-             ":=:=:=:=:=:=:=:=:=:=:=:=:=:[ " << "Internet Weather Stats" << " ]:=:=:=:=:=:=:=:=:=:=:=:=:=:\n"
-             ":    Location = " << wloc << ", " << zip << "\n"
-             ":        Temp = " << wtemp << "\n"
-             ":     Weather = " << wcond << "\n"
-             ":         Sky = " << wsky << "\n"
-             ":=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:[]:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:";
+     std::cout << "" << cyan << ":=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=[ " << red_bold << "System Stats" << cyan << " ]=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:\n"
+             "" << cyan << ":   " << white_bold << "Date/Time = " << green_bold << datetime << ""
+             "" << cyan << ":    " << white_bold << "Hostname = " << green_bold << hostname << "\n"
+             "" << cyan << ":     " << white_bold << "WLAN IP = " << green_bold << wlanip << "\n"
+             "" << cyan << ":      " << white_bold << "LAN IP = " << green_bold << lanip << "\n"
+             "" << cyan << ":      " << white_bold << "Kernel = " << green_bold << kernelver << "\n"
+             "" << cyan << ":      " << white_bold << "Memory = " << green_bold << memsize << "kB\n"
+             "" << cyan << ":       " << white_bold << "Stats = " << green_bold << stats << "\n"
+             "" << cyan << ":=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:[ " << red_bold << "User Stats" << cyan << " ]:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:\n"
+             "" << cyan << ":    " << white_bold << "Username = " << green_bold << user << "\n"
+             "" << cyan << ":  " << white_bold << "Last Login = " << green_bold << last << "\n"
+             "" << cyan << ":        Home = " << green_bold << homedir << "\n"
+             "" << cyan << ":   " << white_bold << "Processes = " << green_bold << proccount << " of " << proclimit << "\n"
+             "" << cyan << ":=:=:=:=:=:=:=:=:=:=:=:=:=:[ " << red_bold << "Internet Weather Stats" << cyan << " ]:=:=:=:=:=:=:=:=:=:=:=:=:=:\n"
+             "" << cyan << ":    " << white_bold << "Location = " << green_bold << wloc << ", " << zip << "\n"
+             "" << cyan << ":        " << white_bold << "Temp = " << green_bold << wtemp << "\n"
+             "" << cyan << ":     " << white_bold << "Weather" << cyan << " = " << green_bold << wcond << "\n"
+             "" << cyan << ":         " << white_bold << "Sky" << cyan << " = " << green_bold << wsky << "\n"
+             "" << cyan << ":=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:[]:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:"
+             "" << color_default << "";
      return 0;
 }
 
