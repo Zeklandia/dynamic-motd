@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <string.h>
 #include <stdio.h>
 #include <cstdlib>
 #include <time.h>
@@ -10,6 +11,11 @@
 #include <fstream>
 #include <unistd.h>
 #include <sys/utsname.h>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <sys/ioctl.h>
+#include <netinet/in.h>
+#include <net/if.h>
 
 using namespace std;
 
@@ -25,9 +31,23 @@ int main()
      char hostname[128];
      gethostname(hostname, sizeof hostname);
      string wlanip;
-     wlanip = system("ifconfig wlan0 | grep 'inet addr:' | cut -d: -f2 | awk '{ print $1}'");
+     int fd1;
+     struct ifreq ifr1;
+     fd1 = socket(AF_INET, SOCK_DGRAM, 0);
+     ifr1.ifr_addr.sa_family = AF_INET;
+     strncpy(ifr1.ifr_name, "wlan0", IFNAMSIZ-1);
+     ioctl(fd1, SIOCGIFADDR, &ifr1);
+     close(fd1);
+     wlanip = inet_ntoa(((struct sockaddr_in *)&ifr1.ifr_addr)->sin_addr);
+     int fd2;
+     struct ifreq ifr2;
+     fd2 = socket(AF_INET, SOCK_DGRAM, 0);
+     ifr2.ifr_addr.sa_family = AF_INET;
+     strncpy(ifr2.ifr_name, "eth0", IFNAMSIZ-1);
+     ioctl(fd2, SIOCGIFADDR, &ifr2);
+     close(fd2);
      string lanip;
-     lanip = system("ifconfig eth0 | grep 'inet addr:' | cut -d: -f2 | awk '{ print $1}'");
+     lanip = inet_ntoa(((struct sockaddr_in *)&ifr2.ifr_addr)->sin_addr);
      struct utsname u;
      uname(&u);
      string kernelver;
