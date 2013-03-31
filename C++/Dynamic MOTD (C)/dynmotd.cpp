@@ -21,15 +21,24 @@ using namespace std;
 
 int main()
 {
+     //Begin loading information
      std::cout << "Loading...\n";
      system("clear");
-     system("bash source $HOME/.config/dynmotd.conf"); //Load settings
+
+     //Load Settings
+     //WIP
+
+     //Get time
      time_t rawtime;
      time ( &rawtime );
      string datetime;
      datetime = ctime( &rawtime );
+
+     //Get hostname
      char hostname[128];
      gethostname(hostname, sizeof hostname);
+
+     //Get WLAN IP address
      string wlanip;
      int wlanipaddr;
      struct ifreq wlanipnumaddr;
@@ -39,6 +48,9 @@ int main()
      ioctl(wlanipaddr, SIOCGIFADDR, &wlanipnumaddr);
      close(wlanipaddr);
      wlanip = inet_ntoa(((struct sockaddr_in *)&wlanipnumaddr.ifr_addr)->sin_addr);
+
+     //Get LAN IP address
+     string lanip;
      int lanipaddr;
      struct ifreq lanipnumaddr;
      lanipaddr = socket(AF_INET, SOCK_DGRAM, 0);
@@ -46,39 +58,65 @@ int main()
      strncpy(lanipnumaddr.ifr_name, "eth0", IFNAMSIZ-1);
      ioctl(lanipaddr, SIOCGIFADDR, &lanipnumaddr);
      close(lanipaddr);
-     string lanip;
      lanip = inet_ntoa(((struct sockaddr_in *)&lanipnumaddr.ifr_addr)->sin_addr);
+
+     //Get kernel version
      struct utsname u;
      uname(&u);
      string kernelver;
      kernelver = u.release;
+
+     //Get RAM size in kB
      string memsize;
-     memsize = system("cat /proc/meminfo | grep MemTotal | awk {'print $2'}");
+     memsize = "mem";
+
+     //Get current users, jobs, login times, and locations
      string stats;
      stats = system("w");
+
+     //Get username
      string user;
      user = getenv("USER");
+
+     //Get time, location, length, and other details for last login
      string last;
      last = system("last -n 2 -R $USER | awk 'NR==2'");
+
+     //Get home directory path
      string homedir;
      homedir = getenv("HOME");
+
+     //Get the current number of this user's active processes
      string proccount;
      proccount = system("ps -Afl | wc -l");
+
+     //Get this user's limit on processes
      string proclimit;
      proclimit = system("cat /proc/meminfo | grep MemTotal | awk {'print $2'}");
+
+     //Print the location and ZIP code being used for weather
      string wloc;
      wloc = system("weather $ZIP | grep 'Current conditions at' | awk '{print $4}'");
      string zip;
      zip = "zip";
+
+     //Get the temperature
      string wtemp;
      wtemp = "Temperature";
+
+     //Get the weather conditions (if there are any)
      string wcond;
      wcond = "Weather conditions";
+
+     //Get the sky conditions
      string wsky;
      wsky = "Sky conditions";
+
+     //Finished!
      std::cout << "Done!\n";
      system("clear");
 
+     //Print the loaded information
      std::cout << ":=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=[ " << "System Stats" << " ]=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:\n"
              ":   Date/Time = " << datetime << ""
              ":    Hostname = " << hostname << "\n"
