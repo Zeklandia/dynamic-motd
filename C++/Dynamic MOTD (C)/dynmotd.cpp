@@ -163,7 +163,7 @@ int main()
              "" << cyan << ":     " << white_bold << "WLAN IP" << cyan << " = " << green_bold << wlanip << "\n"
              "" << cyan << ":      " << white_bold << "LAN IP" << cyan << " = " << green_bold << lanip << "\n"
              "" << cyan << ":      " << white_bold << "Kernel" << cyan << " = " << green_bold << kernelver << "\n"
-             "" << cyan << ":      " << white_bold << "Memory" << cyan << " = " << green_bold << memsize << "kB\n"
+             "" << cyan << ":      " << white_bold << "Memory" << cyan << " = " << green_bold << memsize << " kB\n"
              "" << cyan << ":       " << white_bold << "Stats" << cyan << " = " << green_bold << stats << "\n"
              "" << cyan << ":=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:[ " << red_bold << "User Stats" << cyan << " ]:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:\n"
              "" << cyan << ":    " << white_bold << "Username" << cyan << " = " << green_bold << user << "\n"
