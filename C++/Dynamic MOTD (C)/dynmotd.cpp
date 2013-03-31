@@ -26,7 +26,18 @@ int main()
      system("clear");
 
      //Load Settings
-     //WIP
+     /*
+     CONFIGFILE=~/.config/dynmotd.conf
+     if [ ! -d ~/.config ];
+     then
+         mkdir ~/.config
+     fi
+     if [ ! -f $CONFIGFILE ];
+     then
+         echo -e # Set options for main script\n# ZIP Code (For weather)\nZIP=11234\n# Print banner (1=yes, 0=no)\nPRINTBAN=1\n# Which banner to print (BANLINUX, BANLINUXBIG, BANUBUNTU, BANANDROID, or BANMACOSX)\nBANNER=BANLINUX >>$CONFIGFILE
+     fi
+     source $CONFIGFILE
+     */
 
      //Get time
      time_t rawtime;
@@ -67,10 +78,12 @@ int main()
      kernelver = u.release;
 
      //Get RAM size in kB
+     //MEMSIZE=`cat /proc/meminfo | grep MemTotal | awk {'print $2'}`
      string memsize;
      memsize = "mem";
 
      //Get current users, jobs, login times, and locations
+     //USERSTATS=`w`
      string stats;
      stats = system("w");
 
@@ -79,6 +92,7 @@ int main()
      user = getenv("USER");
 
      //Get time, location, length, and other details for last login
+     //LASTLOGIN=`last -n 2 -R $USER | awk 'NR==2'`
      string last;
      last = system("last -n 2 -R $USER | awk 'NR==2'");
 
@@ -87,28 +101,34 @@ int main()
      homedir = getenv("HOME");
 
      //Get the current number of this user's active processes
+     //PROCOUNT=`ps -Afl | wc -l`
      string proccount;
      proccount = system("ps -Afl | wc -l");
 
      //Get this user's limit on processes
+     //PROLIMIT=`ulimit -u`
      string proclimit;
      proclimit = system("cat /proc/meminfo | grep MemTotal | awk {'print $2'}");
 
      //Print the location and ZIP code being used for weather
+     //WLOC=`weather $ZIP | grep 'Current conditions at' | awk '{print $4}'`
      string wloc;
-     wloc = system("weather $ZIP | grep 'Current conditions at' | awk '{print $4}'");
+     wloc = "location";
      string zip;
      zip = "zip";
 
      //Get the temperature
+     //WTEMP=`weather $ZIP | grep 'Temperature:' | awk '{print $2}'`
      string wtemp;
      wtemp = "Temperature";
 
      //Get the weather conditions (if there are any)
+     //WCOND=`weather $ZIP | grep 'Weather:' | cut -d: -f2 | cut -c2-`
      string wcond;
      wcond = "Weather conditions";
 
      //Get the sky conditions
+     //WSKY=`weather $ZIP | grep 'Sky conditions:' | cut -d: -f2 | cut -c2-`
      string wsky;
      wsky = "Sky conditions";
 
@@ -137,44 +157,5 @@ int main()
              ":         Sky = " << wsky << "\n"
              ":=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:[]:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:";
      return 0;
-     /*
-      #!/bin/bash
-
-reset
-
-# Load information and settings
-
-echo Loading...
-BASEDIR=$(dirname $0)
-CONFIGFILE=~/.config/dynmotd.conf
-if [ ! -d ~/.config ];
-then
-    mkdir ~/.config
-fi
-if [ ! -f $CONFIGFILE ];
-then
-    echo -e # Set options for main script\n# ZIP Code (For weather)\nZIP=11234\n# Print banner (1=yes, 0=no)\nPRINTBAN=1\n# Which banner to print (BANLINUX, BANLINUXBIG, BANUBUNTU, BANANDROID, or BANMACOSX)\nBANNER=BANLINUX >>$CONFIGFILE
-fi
-source $CONFIGFILE
-TIME=`date`
-HOST=`hostname`
-WIFIADDR=`ifconfig wlan0 | grep 'inet addr:' | cut -d: -f2 | awk '{ print $1}'`
-ETHADDR=`ifconfig eth0 | grep 'inet addr:' | cut -d: -f2 | awk '{ print $1}'`
-KERNELVER=`uname -r`
-USERSTATS=`w`
-MEMSIZE=`cat /proc/meminfo | grep MemTotal | awk {'print $2'}`
-USER=`whoami`
-LASTLOGIN=`last -n 2 -R $USER | awk 'NR==2'`
-PROCOUNT=`ps -Afl | wc -l`
-PROLIMIT=`ulimit -u`
-USERDIR=`echo ~`
-WLOC=`weather $ZIP | grep 'Current conditions at' | awk '{print $4}'`
-WTEMP=`weather $ZIP | grep 'Temperature:' | awk '{print $2}'`
-WCOND=`weather $ZIP | grep 'Weather:' | cut -d: -f2 | cut -c2-`
-WSKY=`weather $ZIP | grep 'Sky conditions:' | cut -d: -f2 | cut -c2-`
-
-echo Done!
-reset
-      */
 }
 
