@@ -12,8 +12,7 @@ then
 fi
 if [ ! -f $CONFIGFILE ];
 then
-    echo -e "# Set options for main script\n# Print full output of w or only the first line (1=full output, 0=first line only)\nFULLW=0\n# Print weather information (1=yes, 0=no)\nWEATHER=1\n# ZIP Code (For weather)\nZIP=11234\n# Print banner (1=yes, 0=no)\nPRINTBAN=1\n# Print a custom banner (1=yes, 0=no)\nCUSTBAN=0\n# Text to be displayed in custom banner (backticks and \ escapes are allowed, use \ n without the space to end a line)\nCUSTBANTEXT=""\n# Which banner to print (BANLINUX, BANLINUXBIG, BANUBUNTU, BANANDROID, or BANMACOSX)\nBANNER=BANLINUX
-" >>$CONFIGFILE
+    echo -e "# Set options for main script\n# Print full output of w or only the first line (1=full output, 0=first line only)\nFULLW=0\n# Print weather information (1=yes, 0=no)\nWEATHER=1\n# ZIP Code (For weather)\nZIP=11234\n# Print banner (1=yes, 0=no)\nPRINTBAN=1\n# Print a custom banner (1=yes, 0=no)\nCUSTBAN=0\n# Text to be displayed in custom banner (backticks and \ escapes are allowed, use \ n without the space to end a line)\nCUSTBANTEXT=""\n# Which banner to print (BANLINUX, BANLINUXBIG, BANUBUNTU, BANANDROID, or BANMACOSX)\nBANNER=BANLINUX" >>$CONFIGFILE
 fi
 if [ ! -f /usr/bin/dynmotd ];
 then
@@ -29,7 +28,7 @@ if [[ $FULLW == 1 ]]
 then
     USERSTATS=`w`
 else
-    USERSTATS=`w | awk 'NR=2'`
+    USERSTATS=`w | awk 'NR==1'`
 fi
 MEMSIZE=`cat /proc/meminfo | grep MemTotal | awk {'print $2'}`
 USER=`whoami`
