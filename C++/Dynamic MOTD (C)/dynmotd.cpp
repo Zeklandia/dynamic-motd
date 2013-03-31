@@ -134,8 +134,8 @@ int main()
      //WLOC=`weather $ZIP | grep 'Current conditions at' | awk '{print $4}'`
      string wloc;
      wloc = "location";
-     string zip;
-     zip = "zip";
+     string wzip;
+     wzip = "zip";
 
      //Get the temperature
      //WTEMP=`weather $ZIP | grep 'Temperature:' | awk '{print $2}'`
@@ -171,7 +171,7 @@ int main()
              "" << cyan << ":        " << white_bold << "Home" << cyan << " = " << green_bold << homedir << "\n"
              "" << cyan << ":   " << white_bold << "Processes" << cyan << " = " << green_bold << proccount << " of " << proclimit << "\n"
              "" << cyan << ":=:=:=:=:=:=:=:=:=:=:=:=:=:[ " << red_bold << "Internet Weather Stats" << cyan << " ]:=:=:=:=:=:=:=:=:=:=:=:=:=:\n"
-             "" << cyan << ":    " << white_bold << "Location" << cyan << " = " << green_bold << wloc << ", " << zip << "\n"
+             "" << cyan << ":    " << white_bold << "Location" << cyan << " = " << green_bold << wloc << ", " << wzip << "\n"
              "" << cyan << ":        " << white_bold << "Temp" << cyan << " = " << green_bold << wtemp << "\n"
              "" << cyan << ":     " << white_bold << "Weather" << cyan << " = " << green_bold << wcond << "\n"
              "" << cyan << ":         " << white_bold << "Sky" << cyan << " = " << green_bold << wsky << "\n"
