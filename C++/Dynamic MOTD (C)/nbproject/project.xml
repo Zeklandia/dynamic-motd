@@ -5,8 +5,8 @@
         <data xmlns="http://www.netbeans.org/ns/make-project/1">
             <name>Dynamic MOTD (C)</name>
             <c-extensions/>
-            <cpp-extensions>cpp,cxx</cpp-extensions>
-            <header-extensions>hxx</header-extensions>
+            <cpp-extensions>cpp</cpp-extensions>
+            <header-extensions/>
             <sourceEncoding>UTF-8</sourceEncoding>
             <make-dep-projects/>
             <sourceRootList>

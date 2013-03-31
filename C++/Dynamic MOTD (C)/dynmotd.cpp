@@ -10,11 +10,8 @@
 #include <fstream>
 #include <unistd.h>
 #include <sys/utsname.h>
-#include </Users/Asher/Dropbox/Development/Workspace/Login-Status-Script/C++/Dynamic MOTD (C)/lib/Talos.hxx>
-#include </Users/Asher/Dropbox/Development/Workspace/Login-Status-Script/C++/Dynamic MOTD (C)/lib/Date.hxx>
 
 using namespace std;
-using namespace Talos;
 
 int main()
 {
@@ -24,7 +21,7 @@ int main()
      time_t rawtime;
      time ( &rawtime );
      string datetime;
-     datetime = Date::GetDate();
+     datetime = ctime( &rawtime );
      char hostname[128];
      gethostname(hostname, sizeof hostname);
      string wlanip;

@@ -8,15 +8,6 @@
     <logicalFolder name="ResourceFiles"
                    displayName="Resource Files"
                    projectFiles="true">
-      <logicalFolder name="lib" displayName="lib" projectFiles="true">
-        <itemPath>lib/Date.cxx</itemPath>
-        <itemPath>lib/Date.hxx</itemPath>
-        <itemPath>lib/Files.cxx</itemPath>
-        <itemPath>lib/Files.hxx</itemPath>
-        <itemPath>lib/String.cxx</itemPath>
-        <itemPath>lib/String.hxx</itemPath>
-        <itemPath>lib/Talos.hxx</itemPath>
-      </logicalFolder>
     </logicalFolder>
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
@@ -51,20 +42,6 @@
       </compileType>
       <item path="dynmotd.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="lib/Date.cxx" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="lib/Date.hxx" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="lib/Files.cxx" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="lib/Files.hxx" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="lib/String.cxx" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="lib/String.hxx" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="lib/Talos.hxx" ex="false" tool="3" flavor2="0">
-      </item>
     </conf>
     <conf name="Release" type="1">
       <toolsSet>
@@ -88,20 +65,6 @@
         </asmTool>
       </compileType>
       <item path="dynmotd.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="lib/Date.cxx" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="lib/Date.hxx" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="lib/Files.cxx" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="lib/Files.hxx" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="lib/String.cxx" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="lib/String.hxx" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="lib/Talos.hxx" ex="false" tool="3" flavor2="0">
       </item>
     </conf>
   </confs>
