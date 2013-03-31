@@ -24,7 +24,7 @@ int main()
      time_t rawtime;
      time ( &rawtime );
      string datetime;
-     datetime = Date.GetDate();
+     datetime = Date::GetDate();
      char hostname[128];
      gethostname(hostname, sizeof hostname);
      string wlanip;
