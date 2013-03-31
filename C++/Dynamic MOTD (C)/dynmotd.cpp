@@ -23,7 +23,7 @@ int main()
 {
      //Begin loading information
      std::cout << "Loading...\n";
-     system("clear");
+     system("reset");
 
      //Load Settings
      /*
@@ -154,7 +154,7 @@ int main()
 
      //Finished!
      std::cout << "Done!\n";
-     system("clear");
+     system("reset");
 
      //Print the loaded information
      std::cout << "" << cyan << ":=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=[ " << red_bold << "System Stats" << cyan << " ]=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:\n"
