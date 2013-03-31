@@ -10,20 +10,21 @@
 #include <fstream>
 #include <unistd.h>
 #include <sys/utsname.h>
+#include </Users/Asher/Dropbox/Development/Workspace/Login-Status-Script/C++/Dynamic MOTD (C)/lib/Talos.hxx>
+#include </Users/Asher/Dropbox/Development/Workspace/Login-Status-Script/C++/Dynamic MOTD (C)/lib/Date.hxx>
 
 using namespace std;
+using namespace Talos;
 
 int main()
 {
      std::cout << "Loading...\n";
      system("clear");
-     system("bash source $HOME/.config/dynmotd.conf");
+     system("bash source $HOME/.config/dynmotd.conf"); //Load settings
      time_t rawtime;
-     struct tm * timeinfo;
-     time (&rawtime);
-     timeinfo = localtime (&rawtime);
+     time ( &rawtime );
      string datetime;
-     datetime = asctime(timeinfo);
+     datetime = Date.GetDate();
      char hostname[128];
      gethostname(hostname, sizeof hostname);
      string wlanip;
@@ -51,7 +52,7 @@ int main()
      string wloc;
      wloc = system("weather $ZIP | grep 'Current conditions at' | awk '{print $4}'");
      string zip;
-     zip = system("$ZIP");
+     zip = "zip";
      string wtemp;
      wtemp = "Temperature";
      string wcond;

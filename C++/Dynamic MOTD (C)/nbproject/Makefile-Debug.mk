@@ -35,7 +35,10 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
-	${OBJECTDIR}/dynmotd.o
+	${OBJECTDIR}/dynmotd.o \
+	${OBJECTDIR}/lib/Date.o \
+	${OBJECTDIR}/lib/Files.o \
+	${OBJECTDIR}/lib/String.o
 
 
 # C Compiler Flags
@@ -66,6 +69,21 @@ ${OBJECTDIR}/dynmotd.o: dynmotd.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
 	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/dynmotd.o dynmotd.cpp
+
+${OBJECTDIR}/lib/Date.o: lib/Date.cxx 
+	${MKDIR} -p ${OBJECTDIR}/lib
+	${RM} $@.d
+	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/lib/Date.o lib/Date.cxx
+
+${OBJECTDIR}/lib/Files.o: lib/Files.cxx 
+	${MKDIR} -p ${OBJECTDIR}/lib
+	${RM} $@.d
+	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/lib/Files.o lib/Files.cxx
+
+${OBJECTDIR}/lib/String.o: lib/String.cxx 
+	${MKDIR} -p ${OBJECTDIR}/lib
+	${RM} $@.d
+	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/lib/String.o lib/String.cxx
 
 # Subprojects
 .build-subprojects:
