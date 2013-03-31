@@ -16,6 +16,9 @@
 #include <sys/ioctl.h>
 #include <netinet/in.h>
 #include <net/if.h>
+#include <sys/sysinfo.h>
+#include <linux/sysinfo.h>
+#include <linux/kernel.h>
 
 using namespace std;
 
@@ -60,6 +63,16 @@ int main()
      string green_bold;
      green_bold = "\033[1;32m";
 
+     //System Stats
+     struct utsname u;
+     uname(&u);
+     const long minute = 60;
+     const long hour = minute * 60;
+     const long day = hour * 24;
+     const double megabyte = 1024 * 1024;
+     struct sysinfo si;
+     sysinfo (&si);
+
      //Get time
      time_t rawtime;
      time ( &rawtime );
@@ -93,20 +106,22 @@ int main()
      lanip = inet_ntoa(((struct sockaddr_in *)&lanipnumaddr.ifr_addr)->sin_addr);
 
      //Get kernel version
-     struct utsname u;
-     uname(&u);
      string kernelver;
      kernelver = u.release;
 
      //Get RAM size in kB
      //MEMSIZE=`cat /proc/meminfo | grep MemTotal | awk {'print $2'}`
+     //printf ("total RAM   : %5.1f MB\n", si.totalram / megabyte);
      string memsize;
-     memsize = "mem";
+     memsize = "RAM";
 
      //Get current users, jobs, login times, and locations
      //USERSTATS=`w`
+     /*printf ("system uptime : %ld days, %ld:%02ld:%02ld\n",
+     si.uptime / day, (si.uptime % day) / hour,
+     (si.uptime % hour) / minute, si.uptime % minute);*/
      string stats;
-     stats = system("w");
+     stats = system("w | awk 'NR==1' | cut -c2-");
 
      //Get username
      string user;
@@ -123,8 +138,9 @@ int main()
 
      //Get the current number of this user's active processes
      //PROCOUNT=`ps -Afl | wc -l`
+     //printf ("process count : %d\n", si.procs);
      string proccount;
-     proccount = system("ps -Afl | wc -l");
+     proccount = (si.procs);
 
      //Get this user's limit on processes
      //PROLIMIT=`ulimit -u`
@@ -164,7 +180,7 @@ int main()
              "" << cyan << ":     " << white_bold << "WLAN IP" << cyan << " = " << green_bold << wlanip << "\n"
              "" << cyan << ":      " << white_bold << "LAN IP" << cyan << " = " << green_bold << lanip << "\n"
              "" << cyan << ":      " << white_bold << "Kernel" << cyan << " = " << green_bold << kernelver << "\n"
-             "" << cyan << ":      " << white_bold << "Memory" << cyan << " = " << green_bold << memsize << " kB\n"
+             "" << cyan << ":      " << white_bold << "Memory" << cyan << " = " << green_bold << memsize << " mB\n"
              "" << cyan << ":       " << white_bold << "Stats" << cyan << " = " << green_bold << stats << "\n"
              "" << cyan << ":=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:[ " << red_bold << "User Stats" << cyan << " ]:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:\n"
              "" << cyan << ":    " << white_bold << "Username" << cyan << " = " << green_bold << user << "\n"
