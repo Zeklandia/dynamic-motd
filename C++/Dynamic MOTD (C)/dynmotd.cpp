@@ -177,7 +177,7 @@ int main()
              "" << cyan << ":     " << white_bold << "Weather" << cyan << " = " << green_bold << wcond << "\n"
              "" << cyan << ":         " << white_bold << "Sky" << cyan << " = " << green_bold << wsky << "\n"
              "" << cyan << ":=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:[]:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:"
-             "" << color_default << "";
+             "" << color_default << endl << endl;
      return 0;
 }
 
