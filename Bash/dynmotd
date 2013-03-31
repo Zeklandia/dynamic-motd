@@ -46,7 +46,6 @@ then
 fi
 
 echo "Done!"
-sleep 1000
 reset
 
 #Begin Driplay
