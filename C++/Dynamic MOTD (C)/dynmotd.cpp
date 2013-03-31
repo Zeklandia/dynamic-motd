@@ -168,7 +168,7 @@ int main()
              "" << cyan << ":=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:[ " << red_bold << "User Stats" << cyan << " ]:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:\n"
              "" << cyan << ":    " << white_bold << "Username = " << green_bold << user << "\n"
              "" << cyan << ":  " << white_bold << "Last Login = " << green_bold << last << "\n"
-             "" << cyan << ":        Home = " << green_bold << homedir << "\n"
+             "" << cyan << ":        " << white_bold << "Home = " << green_bold << homedir << "\n"
              "" << cyan << ":   " << white_bold << "Processes = " << green_bold << proccount << " of " << proclimit << "\n"
              "" << cyan << ":=:=:=:=:=:=:=:=:=:=:=:=:=:[ " << red_bold << "Internet Weather Stats" << cyan << " ]:=:=:=:=:=:=:=:=:=:=:=:=:=:\n"
              "" << cyan << ":    " << white_bold << "Location = " << green_bold << wloc << ", " << zip << "\n"
