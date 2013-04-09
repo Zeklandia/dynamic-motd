@@ -38,40 +38,143 @@ then
     echo -e "# Set options for main script\n# Turn debugging mode on or off (1 to enable, 0 to disable\nDEBUG=0\n# Color for Output\nTITLE_COLOR=\"$WHITE_BOLD\"\nHEADER_COLOR=\"$RED_BOLD\"\nBORDER_COLOR=\"$CYAN\"\nOUTPUT_COLOR=\"$GREEN_BOLD\"\n# Print full output of the command w or only the first line (1=full output, 0=first line only)\nFULLW=0\n# Print weather information (1=yes, 0=no)\nWEATHER=1\n# WEATHER_ZIP Code (For weather)\nWEATHER_ZIP=11234\n# Print banner (1=yes, 0=no)\nPRINTBAN=1\n# Print a custom banner (1=yes, 0=no)\nCUSTBAN=0\n# Text to be displayed in custom banner (backticks and \ escapes are allowed, use a backslash followed by the letter n to end a line(\ n without the space))\nCUSTBANTEXT=\"\"\n# Which banner to print (BANLINUX, BANLINUXBIG, BANUBUNTU, BANANDROID, or BANMACOSX)\nBANNER=BANLINUX\n# Custom Command Section (Set CUSTOM to 1 to activate, 0 to disable)\nCUSTOM=0\nCUSTOM_HEADER=\"Custom Command Stats\"\nCUSTOM_TITLE=\"Custom Command\"\nCUSTOM_COMMAND=\"echo Custom Command Output\"" >> $CONFIGFILE
 fi
 
-# Link executable if not already done
-
-if [ ! -f /usr/bin/dynmotd ];
+if [ ! -f /usr/bin/dynmotd ];                                                                                # Link executable
 then
     ln -s "/usr/local/bin/dynmotd" "/usr/bin/"
 fi
 
+################################################################################
+
 source $CONFIGFILE                                                                                           # Load settings
+
+################################################################################
+
+if [ $DEBUG == 1 ];
+then
+    echo "Loading Time/Date..."
+fi
+
 DATE_TIME=`date`                                                                                             # Time and Date
+
+################################################################################
+
+if [ $DEBUG == 1 ];
+then
+    echo "Loading Hostname..."
+fi
+
 HOSTNAME=`hostname`                                                                                          # Hostname
+
+################################################################################
+
+if [ $DEBUG == 1 ];
+then
+    echo "Loading WLAN IP Address..."
+fi
+
 WLAN_IP=`ifconfig wlan0 | grep 'inet addr:' | cut -d: -f2 | awk '{ print $1}'`                               # WLAN/Wi-Fi IP Address
+
+################################################################################
+
+if [ $DEBUG == 1 ];
+then
+    echo "Loading LAN IP Address..."
+fi
+
 LAN_IP=`ifconfig eth0 | grep 'inet addr:' | cut -d: -f2 | awk '{ print $1}'`                                 # LAN/Ethernet IP Address
+
+################################################################################
+
+if [ $DEBUG == 1 ];
+then
+    echo "Loading Kernel version..."
+
+fi
 KERNEL_VERSION=`uname -r`                                                                                    # Kernel version
 
-# User Stats (Login times, locations, current jobs, etc.)
+################################################################################
 
-if [ $FULLW == 1 ];
+if [ $FULLW == 1 ];                                                                                          # User Stats
 then
+    if [ $DEBUG == 1 ];
+    then
+        echo "Loading Users with full output..."
+    fi
+
     USER_STATS=`w`                                                                                           # All user stats
 else
-    USER_STATS=`w | awk 'NR==1' | cut -c2-`                                                                  # Uptime, number of users, load averages
+    if [ $DEBUG == 1 ];
+    then
+        echo "Loading Users with only stats..."
+    fi
+
+    USER_STATS=`w | awk 'NR==1' | cut -c2-`                                                                  # Basic stats
+fi
+
+################################################################################
+
+if [ $DEBUG == 1 ];
+then
+    echo "Loading RAM Size..."
 fi
 
 RAM_SIZE=`cat /proc/meminfo | grep MemTotal | awk {'print $2'}`                                              # RAM Size
+
+################################################################################
+
+if [ $DEBUG == 1 ];
+then
+    echo "Loading Username..."
+fi
+
 USERNAME=`whoami`                                                                                            # Username
+
+################################################################################
+
+if [ $DEBUG == 1 ];
+then
+    echo "Loading Last login..."
+fi
+
 LAST_LOGIN=`last -n 2 -R $USERNAME | awk 'NR==2'`                                                            # Last Login
+
+################################################################################
+
+if [ $DEBUG == 1 ];
+then
+    echo "Loading Home path..."
+fi
+
 HOME_PATH=`echo ~`                                                                                           # Home path
+
+################################################################################
+
+if [ $DEBUG == 1 ];
+then
+    echo "Loading Process count..."
+fi
+
 PROCESS_COUNT=`ps -Afl | wc -l`                                                                              # Number of processes
+
+################################################################################
+
+if [ $DEBUG == 1 ];
+then
+    echo "Loading Process limit..."
+fi
+
 PROCESS_LIMIT=`ulimit -u`                                                                                    # Total processes allowed
 
-# Weather, if enabled
+################################################################################
 
-if [ $WEATHER == 1 ];
+if [ $DEBUG == 1 ];
 then
+    echo "Loading Weather..."
+fi
+
+if [ $WEATHER == 1 ];                                                                                        # Weather
+then
+    
     WEATHER_ZIP=$ZIP
     WEATHER_LOCATION=`weather $WEATHER_ZIP | grep 'Current conditions at' | awk '{print $4}'`                # Location used for weather
     WEATHER_TEMPERATURE=`weather $WEATHER_ZIP | grep 'Temperature:' | awk '{print $2}'`                      # Current temperature in Farenheit
@@ -79,12 +182,19 @@ then
     WEATHER_SKY_CONDITIONS=`weather $WEATHER_ZIP | grep 'Sky conditions:' | cut -d: -f2 | cut -c2-`          # Current sky conditions
 fi
 
-# Allow for a Custom Command if enabled
+################################################################################
+
+if [ $DEBUG == 1 ];                                                                                          # Custom command
+then
+    echo "Loading Custom command..."
+fi
 
 if [ $CUSTOM == 1 ];
 then
     CUSTOM_COMMAND_OUTPUT=`$CUSTOM_COMMAND`
 fi
+
+################################################################################
 
 echo "Done!"
 
@@ -93,6 +203,8 @@ then
     sleep 100
 fi
 reset
+
+################################################################################
 
 # Begin Driplay
 
