@@ -35,7 +35,7 @@ fi
 
 if [ ! -f $CONFIGFILE ];
 then
-    echo -e "# Set options for main script\n# Turn debugging mode on or off (1 to enable, 0 to disable\nDEBUG=0\n# Color for Output\nTITLE_COLOR=\"$WHITE_BOLD\"\nHEADER_COLOR=\"$RED_BOLD\"\nBORDER_COLOR=\"$CYAN\"\nOUTPUT_COLOR=\"$GREEN_BOLD\"\n# Print full output of the command w or only the first line (1=full output, 0=first line only)\nFULLW=0\n# Print weather information (1=yes, 0=no)\nWEATHER=1\n# ZIP Code (For weather)\nZIP=11234\n# Print banner (1=yes, 0=no)\nPRINTBAN=1\n# Print a custom banner (1=yes, 0=no)\nCUSTBAN=0\n# Text to be displayed in custom banner (backticks and \ escapes are allowed, use a backslash followed by the letter n to end a line(\ n without the space))\nCUSTBANTEXT=\"\"\n# Which banner to print (BANLINUX, BANLINUXBIG, BANUBUNTU, BANANDROID, or BANMACOSX)\nBANNER=BANLINUX\n# Custom Command Section (Set CUSTOM to 1 to activate, 0 to disable)\nCUSTOM=0\nCUSTOM_HEADER=\"Custom Command Stats\"\nCUSTOM_TITLE=\"Custom Command\"\nCUSTOM_COMMAND=\"echo Custom Command Output\"" >> $CONFIGFILE
+    echo -e "# Set options for main script\n# Turn debugging mode on or off (1 to enable, 0 to disable\nDEBUG=0\n# Color for Output\nTITLE_COLOR=\"$WHITE_BOLD\"\nHEADER_COLOR=\"$RED_BOLD\"\nBORDER_COLOR=\"$CYAN\"\nOUTPUT_COLOR=\"$GREEN_BOLD\"\n# Print full output of the command w or only the first line (1=full output, 0=first line only)\nFULLW=0\n# Print weather information (1=yes, 0=no)\nWEATHER=1\n# WEATHER_ZIP Code (For weather)\nWEATHER_ZIP=11234\n# Print banner (1=yes, 0=no)\nPRINTBAN=1\n# Print a custom banner (1=yes, 0=no)\nCUSTBAN=0\n# Text to be displayed in custom banner (backticks and \ escapes are allowed, use a backslash followed by the letter n to end a line(\ n without the space))\nCUSTBANTEXT=\"\"\n# Which banner to print (BANLINUX, BANLINUXBIG, BANUBUNTU, BANANDROID, or BANMACOSX)\nBANNER=BANLINUX\n# Custom Command Section (Set CUSTOM to 1 to activate, 0 to disable)\nCUSTOM=0\nCUSTOM_HEADER=\"Custom Command Stats\"\nCUSTOM_TITLE=\"Custom Command\"\nCUSTOM_COMMAND=\"echo Custom Command Output\"" >> $CONFIGFILE
 fi
 
 # Link executable if not already done
@@ -46,7 +46,7 @@ then
 fi
 
 source $CONFIGFILE                                                                                 # Load settings
-TIME=`date`                                                                                        # Time and Date
+DATE_TIME=`date`                                                                                        # Time and Date
 HOSTNAME=`hostname`                                                                                # Hostname
 WLAN_IP=`ifconfig wlan0 | grep 'inet addr:' | cut -d: -f2 | awk '{ print $1}'`                     # WLAN/Wi-Fi IP Address
 LAN_IP=`ifconfig eth0 | grep 'inet addr:' | cut -d: -f2 | awk '{ print $1}'`                       # LAN/Ethernet IP Address
@@ -62,8 +62,8 @@ else
 fi
 
 RAM_SIZE=`cat /proc/meminfo | grep MemTotal | awk {'print $2'}`                                    # RAM Size
-USER=`whoami`                                                                                      # Username
-LAST_LOGIN=`last -n 2 -R $USER | awk 'NR==2'`                                                      # Last Login
+USERNAME=`whoami`                                                                                      # Username
+LAST_LOGIN=`last -n 2 -R $USERNAME | awk 'NR==2'`                                                      # Last Login
 HOME_PATH=`echo ~`                                                                                 # Home path
 PROCESS_COUNT=`ps -Afl | wc -l`                                                                    # Number of processes
 PROCESS_LIMIT=`ulimit -u`                                                                          # Total processes allowed
@@ -72,10 +72,11 @@ PROCESS_LIMIT=`ulimit -u`                                                       
 
 if [ $WEATHER == 1 ];
 then
-    WEATHER_LOCATION=`weather $ZIP | grep 'Current conditions at' | awk '{print $4}'`              # Location used for weather
-    WEATHER_TEMPERATURE=`weather $ZIP | grep 'Temperature:' | awk '{print $2}'`                    # Current temperature in Farenheit
-    WEATHER_CONDITIONS=`weather $ZIP | grep 'Weather:' | cut -d: -f2 | cut -c2-`                   # Current weather conditions
-    WEATHER_SKY_CONDITIONS=`weather $ZIP | grep 'Sky conditions:' | cut -d: -f2 | cut -c2-`        # Current sky conditions
+    WEATHER_ZIP=$ZIP
+    WEATHER_LOCATION=`weather $WEATHER_ZIP | grep 'Current conditions at' | awk '{print $4}'`              # Location used for weather
+    WEATHER_TEMPERATURE=`weather $WEATHER_ZIP | grep 'Temperature:' | awk '{print $2}'`                    # Current temperature in Farenheit
+    WEATHER_CONDITIONS=`weather $WEATHER_ZIP | grep 'Weather:' | cut -d: -f2 | cut -c2-`                   # Current weather conditions
+    WEATHER_SKY_CONDITIONS=`weather $WEATHER_ZIP | grep 'Sky conditions:' | cut -d: -f2 | cut -c2-`        # Current sky conditions
 fi
 
 # Allow for a Custom Command if enabled
@@ -157,7 +158,7 @@ then
 fi
 
 echo -e "$BORDER_COLOR:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=[$HEADER_COLOR System Stats $BORDER_COLOR]=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:
-$BORDER_COLOR:  $TITLE_COLOR Date/Time $BORDER_COLOR= $OUTPUT_COLOR$TIME
+$BORDER_COLOR:  $TITLE_COLOR Date/Time $BORDER_COLOR= $OUTPUT_COLOR$DATE_TIME
 $BORDER_COLOR:   $TITLE_COLOR Hostname $BORDER_COLOR= $OUTPUT_COLOR$HOSTNAME
 $BORDER_COLOR:    $TITLE_COLOR WLAN IP $BORDER_COLOR= $OUTPUT_COLOR$WLAN_IP
 $BORDER_COLOR:     $TITLE_COLOR LAN IP $BORDER_COLOR= $OUTPUT_COLOR$LAN_IP
@@ -165,7 +166,7 @@ $BORDER_COLOR:     $TITLE_COLOR Kernel $BORDER_COLOR= $OUTPUT_COLOR$KERNEL_VERSI
 $BORDER_COLOR:     $TITLE_COLOR Memory $BORDER_COLOR= $OUTPUT_COLOR$RAM_SIZE kB
 $BORDER_COLOR:      $TITLE_COLOR Stats $BORDER_COLOR= $OUTPUT_COLOR$USER_STATS
 $BORDER_COLOR:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:[$HEADER_COLOR User Stats $BORDER_COLOR]:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:
-$BORDER_COLOR:   $TITLE_COLOR Username $BORDER_COLOR= $OUTPUT_COLOR$USER
+$BORDER_COLOR:   $TITLE_COLOR Username $BORDER_COLOR= $OUTPUT_COLOR$USERNAME
 $BORDER_COLOR: $TITLE_COLOR Last Login $BORDER_COLOR= $OUTPUT_COLOR$LAST_LOGIN
 $BORDER_COLOR:       $TITLE_COLOR Home $BORDER_COLOR= $OUTPUT_COLOR$HOME_PATH
 $BORDER_COLOR:  $TITLE_COLOR Processes $BORDER_COLOR= $OUTPUT_COLOR$PROCESS_COUNT of $PROCESS_LIMIT"
@@ -173,7 +174,7 @@ $BORDER_COLOR:  $TITLE_COLOR Processes $BORDER_COLOR= $OUTPUT_COLOR$PROCESS_COUN
 if [ $WEATHER == 1 ];
 then
     echo -e "$BORDER_COLOR:=:=:=:=:=:=:=:=:=:=:=:=:=:[$HEADER_COLOR Internet Weather Stats $BORDER_COLOR]:=:=:=:=:=:=:=:=:=:=:=:=:=:
-$BORDER_COLOR:   $TITLE_COLOR Location $BORDER_COLOR= $OUTPUT_COLOR$WEATHER_LOCATION, $ZIP
+$BORDER_COLOR:   $TITLE_COLOR Location $BORDER_COLOR= $OUTPUT_COLOR$WEATHER_LOCATION, $WEATHER_ZIP
 $BORDER_COLOR:       $TITLE_COLOR Temp $BORDER_COLOR= $OUTPUT_COLOR$WEATHER_TEMPERATURE \u00b0F
 $BORDER_COLOR:    $TITLE_COLOR Weather $BORDER_COLOR= $OUTPUT_COLOR$WEATHER_CONDITIONS
 $BORDER_COLOR:        $TITLE_COLOR Sky $BORDER_COLOR= $OUTPUT_COLOR$WEATHER_SKY_CONDITIONS"
