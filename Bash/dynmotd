@@ -45,38 +45,38 @@ then
     ln -s "/usr/local/bin/dynmotd" "/usr/bin/"
 fi
 
-source $CONFIGFILE                                                                                 # Load settings
-DATE_TIME=`date`                                                                                        # Time and Date
-HOSTNAME=`hostname`                                                                                # Hostname
-WLAN_IP=`ifconfig wlan0 | grep 'inet addr:' | cut -d: -f2 | awk '{ print $1}'`                     # WLAN/Wi-Fi IP Address
-LAN_IP=`ifconfig eth0 | grep 'inet addr:' | cut -d: -f2 | awk '{ print $1}'`                       # LAN/Ethernet IP Address
-KERNEL_VERSION=`uname -r`                                                                          # Kernel version
+source $CONFIGFILE                                                                                           # Load settings
+DATE_TIME=`date`                                                                                             # Time and Date
+HOSTNAME=`hostname`                                                                                          # Hostname
+WLAN_IP=`ifconfig wlan0 | grep 'inet addr:' | cut -d: -f2 | awk '{ print $1}'`                               # WLAN/Wi-Fi IP Address
+LAN_IP=`ifconfig eth0 | grep 'inet addr:' | cut -d: -f2 | awk '{ print $1}'`                                 # LAN/Ethernet IP Address
+KERNEL_VERSION=`uname -r`                                                                                    # Kernel version
 
 # User Stats (Login times, locations, current jobs, etc.)
 
 if [ $FULLW == 1 ];
 then
-    USER_STATS=`w`                                                                                 # All user stats
+    USER_STATS=`w`                                                                                           # All user stats
 else
-    USER_STATS=`w | awk 'NR==1' | cut -c2-`                                                        # Uptime, number of users, load averages
+    USER_STATS=`w | awk 'NR==1' | cut -c2-`                                                                  # Uptime, number of users, load averages
 fi
 
-RAM_SIZE=`cat /proc/meminfo | grep MemTotal | awk {'print $2'}`                                    # RAM Size
-USERNAME=`whoami`                                                                                      # Username
-LAST_LOGIN=`last -n 2 -R $USERNAME | awk 'NR==2'`                                                      # Last Login
-HOME_PATH=`echo ~`                                                                                 # Home path
-PROCESS_COUNT=`ps -Afl | wc -l`                                                                    # Number of processes
-PROCESS_LIMIT=`ulimit -u`                                                                          # Total processes allowed
+RAM_SIZE=`cat /proc/meminfo | grep MemTotal | awk {'print $2'}`                                              # RAM Size
+USERNAME=`whoami`                                                                                            # Username
+LAST_LOGIN=`last -n 2 -R $USERNAME | awk 'NR==2'`                                                            # Last Login
+HOME_PATH=`echo ~`                                                                                           # Home path
+PROCESS_COUNT=`ps -Afl | wc -l`                                                                              # Number of processes
+PROCESS_LIMIT=`ulimit -u`                                                                                    # Total processes allowed
 
 # Weather, if enabled
 
 if [ $WEATHER == 1 ];
 then
     WEATHER_ZIP=$ZIP
-    WEATHER_LOCATION=`weather $WEATHER_ZIP | grep 'Current conditions at' | awk '{print $4}'`              # Location used for weather
-    WEATHER_TEMPERATURE=`weather $WEATHER_ZIP | grep 'Temperature:' | awk '{print $2}'`                    # Current temperature in Farenheit
-    WEATHER_CONDITIONS=`weather $WEATHER_ZIP | grep 'Weather:' | cut -d: -f2 | cut -c2-`                   # Current weather conditions
-    WEATHER_SKY_CONDITIONS=`weather $WEATHER_ZIP | grep 'Sky conditions:' | cut -d: -f2 | cut -c2-`        # Current sky conditions
+    WEATHER_LOCATION=`weather $WEATHER_ZIP | grep 'Current conditions at' | awk '{print $4}'`                # Location used for weather
+    WEATHER_TEMPERATURE=`weather $WEATHER_ZIP | grep 'Temperature:' | awk '{print $2}'`                      # Current temperature in Farenheit
+    WEATHER_CONDITIONS=`weather $WEATHER_ZIP | grep 'Weather:' | cut -d: -f2 | cut -c2-`                     # Current weather conditions
+    WEATHER_SKY_CONDITIONS=`weather $WEATHER_ZIP | grep 'Sky conditions:' | cut -d: -f2 | cut -c2-`          # Current sky conditions
 fi
 
 # Allow for a Custom Command if enabled
@@ -179,13 +179,12 @@ $BORDER_COLOR:       $TITLE_COLOR Temp $BORDER_COLOR= $OUTPUT_COLOR$WEATHER_TEMP
 $BORDER_COLOR:    $TITLE_COLOR Weather $BORDER_COLOR= $OUTPUT_COLOR$WEATHER_CONDITIONS
 $BORDER_COLOR:        $TITLE_COLOR Sky $BORDER_COLOR= $OUTPUT_COLOR$WEATHER_SKY_CONDITIONS"
 fi
+
 if [ $CUSTOM == 1 ];
 then
     echo -e "$BORDER_COLOR:=:=:=:=:=:=:=:=:=:=:=:=:=:=[$HEADER_COLOR $CUSTOM_HEADER $BORDER_COLOR]=:=:=:=:=:=:=:=:=:=:=:=:=:=:
-$BORDER_COLOR:   $TITLE_COLOR $CUSTOM_TITLE $BORDER_COLOR= $OUTPUT_COLOR$CUSTOM_COMMAND_OUTPUT
-$BORDER_COLOR:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:[]:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:
-$DEFAULT_FORMAT"
-else
-    echo -e "$BORDER_COLOR:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:[]:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:
-$DEFAULT_FORMAT"
+$BORDER_COLOR:   $TITLE_COLOR $CUSTOM_TITLE $BORDER_COLOR= $OUTPUT_COLOR$CUSTOM_COMMAND_OUTPUT"
 fi
+
+echo -e "$BORDER_COLOR:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:[]:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:
+$DEFAULT_FORMAT"
