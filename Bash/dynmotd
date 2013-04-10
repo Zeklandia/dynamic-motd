@@ -1,5 +1,7 @@
 #!/bin/bash
 
+SCRIPT_VERSION=2
+
 reset
 
 # Load information and settings
@@ -22,20 +24,19 @@ YELLOW="\033[0;33m"
 YELLOW_BOLD="\033[1;33m"
 DEFAULT_FORMAT="\033[0;0m"
 
-CONFIGFILE=~/.config/dynmotd.conf
+################################################################################
 
-# Create configuration directory if non-existant
-
-if [ ! -d ~/.config ];
+if [ ! -d ~/.config ];                                                                                       # Auto-create config directory
 then
     mkdir ~/.config
 fi
 
-# Create configuration file if non-existant
+CONFIGURATION_FILE=~/.config/dynmotd.conf
+CONFIGURATION_CONTENT="# Set options for main script\n# Configuration version\nCONFIGURATION_VERSION=2\n# Turn debugging mode on or off (1 to enable, 0 to disable)\nDEBUG=0\n# Color for Output\nTITLE_COLOR=\"$WHITE_BOLD\"\nHEADER_COLOR=\"$RED_BOLD\"\nBORDER_COLOR=\"$CYAN\"\nOUTPUT_COLOR=\"$GREEN_BOLD\"\n# Print full output of the command w or only the first line (1=full output, 0=first line only)\nFULLW=0\n# Print weather information (1=yes, 0=no)\nWEATHER=1\n# ZIP Code (For weather)\nZIP=11234\n# Print banner (1=yes, 0=no)\nPRINTBAN=1\n# Print a custom banner (1=yes, 0=no)\nCUSTBAN=0\n# Text to be displayed in custom banner (backticks and \ escapes are allowed, use a backslash followed by the letter n to end a line(\ n without the space))\nCUSTBANTEXT=\"\"\n# Which banner to print (BANLINUX, BANLINUXBIG, BANUBUNTU, BANANDROID, or BANMACOSX)\nBANNER=BANLINUX\n# Custom Command Section (Set CUSTOM to 1 to activate, 0 to disable)\nCUSTOM=0\nCUSTOM_HEADER=\"Custom Command Stats\"\nCUSTOM_TITLE=\"Custom Command\"\nCUSTOM_COMMAND=\"echo Custom Command Output\""
 
-if [ ! -f $CONFIGFILE ];
+if [ ! -f $CONFIGURATION_FILE ];                                                                             # Auto-create configuration
 then
-    echo -e "# Set options for main script\n# Turn debugging mode on or off (1 to enable, 0 to disable\nDEBUG=0\n# Color for Output\nTITLE_COLOR=\"$WHITE_BOLD\"\nHEADER_COLOR=\"$RED_BOLD\"\nBORDER_COLOR=\"$CYAN\"\nOUTPUT_COLOR=\"$GREEN_BOLD\"\n# Print full output of the command w or only the first line (1=full output, 0=first line only)\nFULLW=0\n# Print weather information (1=yes, 0=no)\nWEATHER=1\n# WEATHER_ZIP Code (For weather)\nWEATHER_ZIP=11234\n# Print banner (1=yes, 0=no)\nPRINTBAN=1\n# Print a custom banner (1=yes, 0=no)\nCUSTBAN=0\n# Text to be displayed in custom banner (backticks and \ escapes are allowed, use a backslash followed by the letter n to end a line(\ n without the space))\nCUSTBANTEXT=\"\"\n# Which banner to print (BANLINUX, BANLINUXBIG, BANUBUNTU, BANANDROID, or BANMACOSX)\nBANNER=BANLINUX\n# Custom Command Section (Set CUSTOM to 1 to activate, 0 to disable)\nCUSTOM=0\nCUSTOM_HEADER=\"Custom Command Stats\"\nCUSTOM_TITLE=\"Custom Command\"\nCUSTOM_COMMAND=\"echo Custom Command Output\"" >> $CONFIGFILE
+    echo -e $CONFIGURATION_CONTENT >> $CONFIGURATION_FILE
 fi
 
 if [ ! -f /usr/bin/dynmotd ];                                                                                # Link executable
@@ -45,7 +46,21 @@ fi
 
 ################################################################################
 
-source $CONFIGFILE                                                                                           # Load settings
+source $CONFIGURATION_FILE                                                                                   # Load settings
+if [ $CONFIGURATION_VERSION == $SCRIPT_VERSION ];
+then
+    if [ $DEBUG == 1 ];
+    then
+        echo "Configuration up-to-date..."
+    fi
+else
+    echo -e $CONFIGURATION_CONTENT > $CONFIGURATION_FILE
+        if [ $DEBUG == 1 ];
+    then
+        echo "Configuration updated..."
+    fi
+fi
+    
 
 ################################################################################
 
