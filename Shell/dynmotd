@@ -1,15 +1,14 @@
 #!/bin/bash
 
 SCRIPT_VERSION=3
+DEBUG_PRINTER=`if [ $DEBUG == 1 ];then echo Loading $SECTION_NAME...;fi`
 
 reset
 
 # Load information and settings
-
 echo "Loading..."
 
 # Color palette
-
 WHITE="\033[0;37m"
 WHITE_BOLD="\033[1;37m"
 BLUE="\033[0;34m"
@@ -24,9 +23,8 @@ YELLOW="\033[0;33m"
 YELLOW_BOLD="\033[1;33m"
 DEFAULT_FORMAT="\033[0;0m"
 
-################################################################################
-
-if [ ! -d ~/.config ];                                                                                       # Auto-create config directory
+# Auto-create config directory
+if [ ! -d ~/.config ]
 then
     mkdir ~/.config
 fi
@@ -34,162 +32,104 @@ fi
 CONFIGURATION_FILE=~/.config/dynmotd.conf
 CONFIGURATION_CONTENT="# Set options for main script\n# Configuration version\nCONFIGURATION_VERSION=$SCRIPT_VERSION\n# Turn debugging mode on or off (1 to enable, 0 to disable)\nDEBUG=0\n# Color for Output\nTITLE_COLOR=\"$WHITE_BOLD\"\nHEADER_COLOR=\"$RED_BOLD\"\nBORDER_COLOR=\"$CYAN\"\nOUTPUT_COLOR=\"$GREEN_BOLD\"\n# Print full output of the command w or only the first line (1=full output, 0=first line only)\nFULLW=0\n# Print weather information (1=yes, 0=no)\nWEATHER=1\n# ZIP Code (For weather)\nZIP=11234\n# Print banner (1=yes, 0=no)\nPRINTBAN=1\n# Print a custom banner (1=yes, 0=no)\nCUSTBAN=0\n# Text to be displayed in custom banner (backticks and \ escapes are allowed, use a backslash followed by the letter n to end a line(\ n without the space))\nCUSTBANTEXT=\"\"\n# Which banner to print (BANLINUX, BANLINUXBIG, BANUBUNTU, BANANDROID, or BANMACOSX)\nBANNER=BANLINUX\n# Custom Command Section (Set CUSTOM to 1 to activate, 0 to disable)\nCUSTOM=0\nCUSTOM_HEADER=\"Custom Command Stats\"\nCUSTOM_TITLE=\"Custom Command\"\nCUSTOM_COMMAND=\"echo Custom Command Output\""
 
-if [ ! -f $CONFIGURATION_FILE ];                                                                             # Auto-create configuration
+# Auto-create configuration
+if [ ! -f $CONFIGURATION_FILE ];
 then
     echo -e $CONFIGURATION_CONTENT >> $CONFIGURATION_FILE
 fi
 
-if [ ! -f /usr/bin/dynmotd ];                                                                                # Link executable
+# Link executable
+if [ ! -f /usr/bin/dynmotd ];
 then
     ln -s "/usr/local/bin/dynmotd" "/usr/bin/"
 fi
 
-################################################################################
-
-source $CONFIGURATION_FILE                                                                                   # Load settings
+# Load settings
+source $CONFIGURATION_FILE
 if [ $CONFIGURATION_VERSION == $SCRIPT_VERSION ];
 then
-    if [ $DEBUG == 1 ];
-    then
-        echo "Configuration up-to-date..."
-    fi
+    SECTION_NAME="Up-to-date configuration"
+    $DEBUG_PRINTER
 else
     echo -e $CONFIGURATION_CONTENT > $CONFIGURATION_FILE
-        if [ $DEBUG == 1 ];
-    then
-        echo "Configuration updated..."
-    fi
-fi
-    
-
-################################################################################
-
-if [ $DEBUG == 1 ];
-then
-    echo "Loading Time/Date..."
+    SECTION_NAME="Updated configuration"
+    $DEBUG_PRINTER
 fi
 
-DATE_TIME=`date`                                                                                             # Time and Date
+# Time and Date
+SECTION_NAME="Date/Time"
+$DEBUG_PRINTER
+DATE_TIME=`date`
 
-################################################################################
+# Hostname
+SECTION_NAME="Hostname"
+$DEBUG_PRINTER
+HOSTNAME=`hostname`
 
-if [ $DEBUG == 1 ];
+# WLAN/Wi-Fi IP Address
+SECTION_NAME="WLAN/Wi-Fi IP Address"
+$DEBUG_PRINTER
+WLAN_IP=`ifconfig wlan0 | grep 'inet addr:' | cut -d: -f2 | awk '{ print $1}'`
+
+# LAN/Ethernet IP Address
+SECTION_NAME="LAN/Ethernet IP Address"
+$DEBUG_PRINTER
+LAN_IP=`ifconfig eth0 | grep 'inet addr:' | cut -d: -f2 | awk '{ print $1}'`
+
+# Kernel version
+SECTION_NAME="Kernel Version"
+$DEBUG_PRINTER
+KERNEL_VERSION=`uname -r`
+
+# User Stats
+if [ $FULLW == 1 ];
 then
-    echo "Loading Hostname..."
-fi
-
-HOSTNAME=`hostname`                                                                                          # Hostname
-
-################################################################################
-
-if [ $DEBUG == 1 ];
-then
-    echo "Loading WLAN IP Address..."
-fi
-
-WLAN_IP=`ifconfig wlan0 | grep 'inet addr:' | cut -d: -f2 | awk '{ print $1}'`                               # WLAN/Wi-Fi IP Address
-
-################################################################################
-
-if [ $DEBUG == 1 ];
-then
-    echo "Loading LAN IP Address..."
-fi
-
-LAN_IP=`ifconfig eth0 | grep 'inet addr:' | cut -d: -f2 | awk '{ print $1}'`                                 # LAN/Ethernet IP Address
-
-################################################################################
-
-if [ $DEBUG == 1 ];
-then
-    echo "Loading Kernel version..."
-
-fi
-KERNEL_VERSION=`uname -r`                                                                                    # Kernel version
-
-################################################################################
-
-if [ $FULLW == 1 ];                                                                                          # User Stats
-then
-    if [ $DEBUG == 1 ];
-    then
-        echo "Loading Users with full output..."
-    fi
-
-    USER_STATS=`w`                                                                                           # All user stats
+    # All user stats
+    SECTION_NAME="All user stats"
+    $DEBUG_PRINTER
+    USER_STATS=`w`
 else
-    if [ $DEBUG == 1 ];
-    then
-        echo "Loading Users with only stats..."
-    fi
-
-    USER_STATS=`w | awk 'NR==1' | cut -c2-`                                                                  # Basic stats
+    # Basic user stats
+    SECTION_NAME="Basic user stats"
+    $DEBUG_PRINTER
+    USER_STATS=`w | awk 'NR==1' | cut -c2-`
 fi
 
-################################################################################
+# RAM Size
+SECTION_NAME="RAM size"
+$DEBUG_PRINTER
+RAM_SIZE=`cat /proc/meminfo | grep MemTotal | awk {'print $2'}`
 
-if [ $DEBUG == 1 ];
+# Username
+SECTION_NAME="Username"
+$DEBUG_PRINTER
+USERNAME=`whoami`
+
+# Last Login
+SECTION_NAME="Last login"
+$DEBUG_PRINTER
+LAST_LOGIN=`last -n 2 -R $USERNAME | awk 'NR==2'`
+
+# Home path
+SECTION_NAME="Home directory path"
+$DEBUG_PRINTER
+HOME_PATH=~
+
+# Number of processes
+SECTION_NAME="Current number of processes"
+$DEBUG_PRINTER
+PROCESS_COUNT=`ps -Afl | wc -l`
+
+# Total processes allowed
+SECTION_NAME="Total allowed processes"
+$DEBUG_PRINTER
+PROCESS_LIMIT=`ulimit -u`
+
+# Weather
+SECTION_NAME="Weather"
+$DEBUG_PRINTER
+if [ $WEATHER == 1 ];
 then
-    echo "Loading RAM Size..."
-fi
-
-RAM_SIZE=`cat /proc/meminfo | grep MemTotal | awk {'print $2'}`                                              # RAM Size
-
-################################################################################
-
-if [ $DEBUG == 1 ];
-then
-    echo "Loading Username..."
-fi
-
-USERNAME=`whoami`                                                                                            # Username
-
-################################################################################
-
-if [ $DEBUG == 1 ];
-then
-    echo "Loading Last login..."
-fi
-
-LAST_LOGIN=`last -n 2 -R $USERNAME | awk 'NR==2'`                                                            # Last Login
-
-################################################################################
-
-if [ $DEBUG == 1 ];
-then
-    echo "Loading Home path..."
-fi
-
-HOME_PATH=`echo ~`                                                                                           # Home path
-
-################################################################################
-
-if [ $DEBUG == 1 ];
-then
-    echo "Loading Process count..."
-fi
-
-PROCESS_COUNT=`ps -Afl | wc -l`                                                                              # Number of processes
-
-################################################################################
-
-if [ $DEBUG == 1 ];
-then
-    echo "Loading Process limit..."
-fi
-
-PROCESS_LIMIT=`ulimit -u`                                                                                    # Total processes allowed
-
-################################################################################
-
-if [ $DEBUG == 1 ];
-then
-    echo "Loading Weather..."
-fi
-
-if [ $WEATHER == 1 ];                                                                                        # Weather
-then
-    
     WEATHER_ZIP=$ZIP
     WEATHER_LOCATION=`weather $WEATHER_ZIP | grep 'Current conditions at' | awk '{print $4}'`                # Location used for weather
     WEATHER_TEMPERATURE=`weather $WEATHER_ZIP | grep 'Temperature:' | awk '{print $2}'`                      # Current temperature in Farenheit
@@ -197,13 +137,9 @@ then
     WEATHER_SKY_CONDITIONS=`weather $WEATHER_ZIP | grep 'Sky conditions:' | cut -d: -f2 | cut -c2-`          # Current sky conditions
 fi
 
-################################################################################
-
-if [ $DEBUG == 1 ];                                                                                          # Custom command
-then
-    echo "Loading Custom command..."
-fi
-
+# Custom command
+SECTION_NAME="Custom command"
+$DEBUG_PRINTER
 if [ $CUSTOM == 1 ];
 then
     CUSTOM_COMMAND_OUTPUT=`$CUSTOM_COMMAND`
@@ -217,12 +153,10 @@ if [ $DEBUG == 1 ];
 then
     sleep 100
 fi
+
 reset
 
-################################################################################
-
 # Begin Driplay
-
 if [ $PRINTBAN == 1 ];
 then
     if [ $CUSTBAN == 1 ];
