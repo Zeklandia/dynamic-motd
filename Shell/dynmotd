@@ -1,0 +1,151 @@
+#!/bin/bash
+SCRIPT_VERSION=3
+reset
+echo "Loading..."
+WHITE="\033[0;37m"
+WHITE_BOLD="\033[1;37m"
+BLUE="\033[0;34m"
+BLUE_BOLD="\033[1;34m"
+CYAN="\033[0;36m"
+CYAN_BOLD="\033[1;36m"
+RED="\033[0;31m"
+RED_BOLD="\033[1;31m"
+GREEN="\033[0;32m"
+GREEN_BOLD="\033[1;32m"
+YELLOW="\033[0;33m"
+YELLOW_BOLD="\033[1;33m"
+DEFAULT_FORMAT="\033[0;0m"
+if [ ! -d ~/.config ];
+then
+    mkdir ~/.config
+fi
+CONFIGURATION_FILE=~/.config/dynmotd.conf
+CONFIGURATION_CONTENT="# Set options for main script\n# Configuration version\nCONFIGURATION_VERSION=$SCRIPT_VERSION\n# Turn debugging mode on or off (1 to enable, 0 to disable)\nDEBUG=0\n# Color for Output\nTITLE_COLOR=\"$WHITE_BOLD\"\nHEADER_COLOR=\"$RED_BOLD\"\nBORDER_COLOR=\"$CYAN\"\nOUTPUT_COLOR=\"$GREEN_BOLD\"\n# Print full output of the command w or only the first line (1=full output, 0=first line only)\nFULLW=0\n# Print weather information (1=yes, 0=no)\nWEATHER=1\n# ZIP Code (For weather)\nZIP=11234\n# Print banner (1=yes, 0=no)\nPRINTBAN=1\n# Print a custom banner (1=yes, 0=no)\nCUSTBAN=0\n# Text to be displayed in custom banner (backticks and \ escapes are allowed, use a backslash followed by the letter n to end a line(\ n without the space))\nCUSTBANTEXT=\"\"\n# Which banner to print (BANLINUX, BANLINUXBIG, BANUBUNTU, BANANDROID, or BANMACOSX)\nBANNER=BANLINUX\n# Custom Command Section (Set CUSTOM to 1 to activate, 0 to disable)\nCUSTOM=0\nCUSTOM_HEADER=\"Custom Command Stats\"\nCUSTOM_TITLE=\"Custom Command\"\nCUSTOM_COMMAND=\"echo Custom Command Output\""
+if [ ! -f $CONFIGURATION_FILE ];
+then
+    echo -e $CONFIGURATION_CONTENT >> $CONFIGURATION_FILE
+fi
+if [ ! -f /usr/bin/dynmotd ];
+then
+    ln -s "/usr/local/bin/dynmotd" "/usr/bin/"
+fi
+PROBED_CONFIGURATION_VERSION=`cat $CONFIGURATION_FILE | grep "CONFIGURATION_VERSION" | cut -d"=" -f2`
+if [ $PROBED_CONFIGURATION_VERSION == $SCRIPT_VERSION ];
+then
+    source $CONFIGURATION_FILE
+else
+    echo -e $CONFIGURATION_CONTENT > $CONFIGURATION_FILE
+fi
+DATE_TIME=`date`
+HOSTNAME=`hostname`
+WLAN_IP=`ifconfig wlan0 | grep 'inet addr:' | cut -d: -f2 | awk '{ print $1}'`
+LAN_IP=`ifconfig eth0 | grep 'inet addr:' | cut -d: -f2 | awk '{ print $1}'`
+KERNEL_VERSION=`uname -r`
+if [ $FULLW == 1 ];
+then
+    USER_STATS=`w`
+else
+    USER_STATS=`w | awk 'NR==1' | cut -c2-`
+fi
+RAM_SIZE=`cat /proc/meminfo | grep MemTotal | awk {'print $2'}`
+USERNAME=`whoami`
+LAST_LOGIN=`last -n 2 -R $USERNAME | awk 'NR==2'`
+HOME_PATH=~
+PROCESS_COUNT=`ps -Afl | wc -l`
+PROCESS_LIMIT=`ulimit -u`
+if [ $WEATHER == 1 ];
+then
+    WEATHER_ZIP=$ZIP
+    WEATHER_LOCATION=`weather $WEATHER_ZIP | grep 'Current conditions at' | awk '{print $4}'`
+    WEATHER_TEMPERATURE=`weather $WEATHER_ZIP | grep 'Temperature:' | awk '{print $2}'`
+    WEATHER_CONDITIONS=`weather $WEATHER_ZIP | grep 'Weather:' | cut -d: -f2 | cut -c2-`
+    WEATHER_SKY_CONDITIONS=`weather $WEATHER_ZIP | grep 'Sky conditions:' | cut -d: -f2 | cut -c2-`
+fi
+if [ $CUSTOM == 1 ];
+then
+    CUSTOM_COMMAND_OUTPUT=`$CUSTOM_COMMAND`
+fi
+echo "Done!"
+reset
+if [ $PRINTBAN == 1 ];
+then
+    if [ $CUSTBAN == 1 ];
+    then
+        echo -e $CUSTBANTEXT
+    else
+    if [ $BANNER == BANLINUXBIG ];
+    then
+        echo -e "$TITLE_COLOR __       __   __   __   __    __  ___   ___
+|  |     |  | |  \ |  | |  |  |  | \  \ /  /
+|  |     |  | |   \|  | |  |  |  |  \  \u203e  /
+|  |____ |  | |  . .  | |  |  |  |   >   <
+|       ||  | |  |\   | |  |__|  |  /  _  \\
+|_______||__| |__| \__|  \______/  /__/ \__\\
+"
+    fi
+    if [ $BANNER == BANUBUNTU ];
+    then
+        echo -e "$TITLE_COLOR   __  ____                __
+  / / / / /_  __  ______  / /___  __
+ / / / / __ \/ / / / __ \/ __/ / / /
+/ /_/ / /_/ / /_/ / / / / /_/ /_/ /
+\____/_____/\____/_/ /_/\__/\____/
+"
+    fi
+    if [ $BANNER == BANLINUX ];
+    then
+        echo -e "$TITLE_COLOR    __    _
+   / /   /_/___  __  ___  __
+  / /   / / __ \/ / / / |/ /
+ / /___/ / / / / /_/ /|   |
+/_____/_/_/ /_/\____//_/\_\\
+"
+    fi
+    if [ $BANNER == BANANDROID ];
+    then
+        echo -e "$TITLE_COLOR    ___              __           __    __
+   /   |  ____  ____/ /________  /_/___/ /
+  / /| | / __ \/ __  / ___/ __ \/ / __  /
+ / ___ |/ / / / /_/ / /  / /_/ / / /_/ /
+/_/  |_/_/ /_/\____/_/   \____/_/\____/
+"
+    fi
+    if [ $BANNER == BANMACOSX ];
+    then
+        echo -e "$TITLE_COLOR    __  ___              ____  _____    _  __
+   /  |/  /__________   / __ \/ ___/   | |/ /
+  / /|_/ / __  / ___/  / / / /\__ \    |   /
+ / /  / / /_/ / /__   / /_/ /___/ /   /   |
+/_/  /_/\____/\___/   \____//____/   /_/|_|
+"
+    fi
+    fi
+fi
+echo -e "$BORDER_COLOR:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=[$HEADER_COLOR System Stats $BORDER_COLOR]=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:
+$BORDER_COLOR:  $TITLE_COLOR Date/Time $BORDER_COLOR= $OUTPUT_COLOR$DATE_TIME
+$BORDER_COLOR:   $TITLE_COLOR Hostname $BORDER_COLOR= $OUTPUT_COLOR$HOSTNAME
+$BORDER_COLOR:    $TITLE_COLOR WLAN IP $BORDER_COLOR= $OUTPUT_COLOR$WLAN_IP
+$BORDER_COLOR:     $TITLE_COLOR LAN IP $BORDER_COLOR= $OUTPUT_COLOR$LAN_IP
+$BORDER_COLOR:     $TITLE_COLOR Kernel $BORDER_COLOR= $OUTPUT_COLOR$KERNEL_VERSION
+$BORDER_COLOR:     $TITLE_COLOR Memory $BORDER_COLOR= $OUTPUT_COLOR$RAM_SIZE kB
+$BORDER_COLOR:      $TITLE_COLOR Stats $BORDER_COLOR= $OUTPUT_COLOR$USER_STATS
+$BORDER_COLOR:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:[$HEADER_COLOR User Stats $BORDER_COLOR]:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:
+$BORDER_COLOR:   $TITLE_COLOR Username $BORDER_COLOR= $OUTPUT_COLOR$USERNAME
+$BORDER_COLOR: $TITLE_COLOR Last Login $BORDER_COLOR= $OUTPUT_COLOR$LAST_LOGIN
+$BORDER_COLOR:       $TITLE_COLOR Home $BORDER_COLOR= $OUTPUT_COLOR$HOME_PATH
+$BORDER_COLOR:  $TITLE_COLOR Processes $BORDER_COLOR= $OUTPUT_COLOR$PROCESS_COUNT of $PROCESS_LIMIT"
+if [ $WEATHER == 1 ];
+then
+    echo -e "$BORDER_COLOR:=:=:=:=:=:=:=:=:=:=:=:=:=:[$HEADER_COLOR Internet Weather Stats $BORDER_COLOR]:=:=:=:=:=:=:=:=:=:=:=:=:=:
+$BORDER_COLOR:   $TITLE_COLOR Location $BORDER_COLOR= $OUTPUT_COLOR$WEATHER_LOCATION, $WEATHER_ZIP
+$BORDER_COLOR:       $TITLE_COLOR Temp $BORDER_COLOR= $OUTPUT_COLOR$WEATHER_TEMPERATURE \u00b0F
+$BORDER_COLOR:    $TITLE_COLOR Weather $BORDER_COLOR= $OUTPUT_COLOR$WEATHER_CONDITIONS
+$BORDER_COLOR:        $TITLE_COLOR Sky $BORDER_COLOR= $OUTPUT_COLOR$WEATHER_SKY_CONDITIONS"
+fi
+if [ $CUSTOM == 1 ];
+then
+    echo -e "$BORDER_COLOR:=:=:=:=:=:=:=:=:=:=:=:=:=:=[$HEADER_COLOR $CUSTOM_HEADER $BORDER_COLOR]=:=:=:=:=:=:=:=:=:=:=:=:=:=:
+$BORDER_COLOR:   $TITLE_COLOR $CUSTOM_TITLE $BORDER_COLOR= $OUTPUT_COLOR$CUSTOM_COMMAND_OUTPUT"
+fi
+echo -e "$BORDER_COLOR:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:[]:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:
+$DEFAULT_FORMAT"
