@@ -45,11 +45,12 @@ then
 fi
 
 # Load settings
-source $CONFIGURATION_FILE
-if [ $CONFIGURATION_VERSION == $SCRIPT_VERSION ];
+PROBED_CONFIGURATION_VERSION=`cat $CONFIGURATION_FILE | grep "CONFIGURATION_VERSION" | cut -d"=" -f2`
+if [ $PROBED_CONFIGURATION_VERSION == $SCRIPT_VERSION ];
 then
-    SECTION_NAME="Up-to-date configuration"
+    SECTION_NAME="Load up-to-date configuration file for settings"
     $DEBUG_PRINTER
+    source $CONFIGURATION_FILE
 else
     echo -e $CONFIGURATION_CONTENT > $CONFIGURATION_FILE
     SECTION_NAME="Updated configuration"
