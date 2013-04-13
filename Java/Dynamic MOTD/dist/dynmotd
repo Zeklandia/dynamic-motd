@@ -1,0 +1,13 @@
+#!/bin/bash
+
+DYNMOTDJARFILE=/usr/local/bin/dynmotd.jar
+if [ ! -d /usr/local/bin ];
+then
+    mkdir /usr/local/bin
+fi
+if [ ! -f $DYNMOTDJARFILE ];
+then
+    wget -O /usr/local/bin/dynmotd.jar https://dl.dropbox.com/s/lx2xtcaa8okr9o0/Dynamic_MOTD.jar?token_hash=AAHhnwoKkCFjf1ei46UK_SanKlDRGKmNw4R460fBZqyNfA&dl=1
+else
+    java -jar $DYNMOTDJARFILE
+fi
