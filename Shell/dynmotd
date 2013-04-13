@@ -145,8 +145,7 @@ then
     CUSTOM_COMMAND_OUTPUT=`$CUSTOM_COMMAND`
 fi
 
-################################################################################
-
+# Finish loading
 echo "Done!"
 
 if [ $DEBUG == 1 ];
