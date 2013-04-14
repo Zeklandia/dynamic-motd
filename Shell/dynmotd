@@ -57,6 +57,44 @@ else
     $DEBUG_PRINTER
 fi
 
+# Take arguments
+
+if [ $1 == "weather" ];
+then
+    echo -e "$BORDER_COLOR:=:=:=:=:=:=:=:=:=:=:=:=:=:[$HEADER_COLOR Internet Weather Stats $BORDER_COLOR]:=:=:=:=:=:=:=:=:=:=:=:=:=:
+$BORDER_COLOR:   $TITLE_COLOR Location $BORDER_COLOR= $OUTPUT_COLOR$WEATHER_LOCATION, $WEATHER_ZIP
+$BORDER_COLOR:       $TITLE_COLOR Temp $BORDER_COLOR= $OUTPUT_COLOR$WEATHER_TEMPERATURE \u00b0F
+$BORDER_COLOR:    $TITLE_COLOR Weather $BORDER_COLOR= $OUTPUT_COLOR$WEATHER_CONDITIONS
+$BORDER_COLOR:        $TITLE_COLOR Sky $BORDER_COLOR= $OUTPUT_COLOR$WEATHER_SKY_CONDITIONS"
+    echo -e "$BORDER_COLOR:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:[]:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:
+$DEFAULT_FORMAT"
+    done
+fi
+
+if [ $1 == "userstats" ];
+then
+    echo -e "$BORDER_COLOR:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:[$HEADER_COLOR User Stats $BORDER_COLOR]:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:
+$BORDER_COLOR:   $TITLE_COLOR Username $BORDER_COLOR= $OUTPUT_COLOR$USERNAME
+$BORDER_COLOR: $TITLE_COLOR Last Login $BORDER_COLOR= $OUTPUT_COLOR$LAST_LOGIN
+$BORDER_COLOR:       $TITLE_COLOR Home $BORDER_COLOR= $OUTPUT_COLOR$HOME_PATH
+$BORDER_COLOR:  $TITLE_COLOR Processes $BORDER_COLOR= $OUTPUT_COLOR$PROCESS_COUNT of $PROCESS_LIMIT"
+    echo -e "$BORDER_COLOR:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:[]:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:
+$DEFAULT_FORMAT"
+    done
+fi
+
+if [ $1 == "systemstats" ];
+then
+    echo -e "$BORDER_COLOR:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:[$HEADER_COLOR User Stats $BORDER_COLOR]:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:
+$BORDER_COLOR:   $TITLE_COLOR Username $BORDER_COLOR= $OUTPUT_COLOR$USERNAME
+$BORDER_COLOR: $TITLE_COLOR Last Login $BORDER_COLOR= $OUTPUT_COLOR$LAST_LOGIN
+$BORDER_COLOR:       $TITLE_COLOR Home $BORDER_COLOR= $OUTPUT_COLOR$HOME_PATH
+$BORDER_COLOR:  $TITLE_COLOR Processes $BORDER_COLOR= $OUTPUT_COLOR$PROCESS_COUNT of $PROCESS_LIMIT"
+    echo -e "$BORDER_COLOR:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:[]:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:
+$DEFAULT_FORMAT"
+    done
+fi
+
 # Time and Date
 SECTION_NAME="Date/Time"
 $DEBUG_PRINTER
