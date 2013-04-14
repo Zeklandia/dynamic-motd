@@ -68,7 +68,7 @@ $BORDER_COLOR:    $TITLE_COLOR Weather $BORDER_COLOR= $OUTPUT_COLOR$WEATHER_COND
 $BORDER_COLOR:        $TITLE_COLOR Sky $BORDER_COLOR= $OUTPUT_COLOR$WEATHER_SKY_CONDITIONS"
     echo -e "$BORDER_COLOR:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:[]:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:
 $DEFAULT_FORMAT"
-    done
+    exit 0
 fi
 
 if [ $1 == "userstats" ];
@@ -80,7 +80,7 @@ $BORDER_COLOR:       $TITLE_COLOR Home $BORDER_COLOR= $OUTPUT_COLOR$HOME_PATH
 $BORDER_COLOR:  $TITLE_COLOR Processes $BORDER_COLOR= $OUTPUT_COLOR$PROCESS_COUNT of $PROCESS_LIMIT"
     echo -e "$BORDER_COLOR:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:[]:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:
 $DEFAULT_FORMAT"
-    done
+    exit 0
 fi
 
 if [ $1 == "systemstats" ];
@@ -92,7 +92,7 @@ $BORDER_COLOR:       $TITLE_COLOR Home $BORDER_COLOR= $OUTPUT_COLOR$HOME_PATH
 $BORDER_COLOR:  $TITLE_COLOR Processes $BORDER_COLOR= $OUTPUT_COLOR$PROCESS_COUNT of $PROCESS_LIMIT"
     echo -e "$BORDER_COLOR:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:[]:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:
 $DEFAULT_FORMAT"
-    done
+    exit 0
 fi
 
 # Time and Date
