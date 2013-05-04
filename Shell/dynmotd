@@ -126,7 +126,7 @@ then
     # All user stats
     SECTION_NAME="All user stats"
     $DEBUG_PRINTER
-    USER_STATS=`w`
+    USER_STATS=`w | cut -c2-`
 else
     # Basic user stats
     SECTION_NAME="Basic user stats"
