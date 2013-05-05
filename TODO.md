@@ -1,5 +1,6 @@
 Project To-Do List
 =======================
+-----------------------
 
  - Work on C++ version
     - Fix printing of system() calls while loading
@@ -16,5 +17,7 @@ Project To-Do List
     - Banners
     - Print colors
     - Print bold text
+
+-----------------------
  - Work on Java version
     - Everything
