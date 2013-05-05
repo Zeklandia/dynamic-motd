@@ -1,5 +1,6 @@
 Login-Info-Script
 =======================
+-----------------------
 
 Script to display basic information about the computer to which you are logging in, when you log in.
 
@@ -15,5 +16,7 @@ Script to display basic information about the computer to which you are logging 
  - Home directory path
  - Number of processes out of total allowed
  - Weather
+
+-----------------------
 
 I will be working to move this from a shell script to a Java or C program and add it to the Ubuntu repositories if I can.
