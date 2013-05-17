@@ -1,0 +1,46 @@
+# Set options for main script
+# Configuration version
+CONFIGURATION_VERSION=4
+# Turn debugging mode on or off (1 to enable, 0 to disable)
+DEBUG=0
+# Color for Output
+TITLE_COLOR="[1;37m"
+HEADER_COLOR="[1;31m"
+BORDER_COLOR="[0;36m"
+OUTPUT_COLOR="[1;32m"
+# Set characters used to border the windows
+TOP_LEFT_CORNER="┌"
+TOP_RIGHT_CORNER="┐"
+BOTTOM_LEFT_CORNER="└"
+BOTTOM_RIGHT_CORNER="┘"
+EDGE_PRIMARY="─"
+EDGE_SECONDARY="─"
+TITLE_HOLDER_LEFT="┤"
+TITLE_HOLDER_RIGHT="├"
+LEFT_SIDE_EDGE="│"
+RIGHT_SIDE_EDGE="│"
+INTERSECTION_LEFT="├"
+INTERSECTION_RIGHT="┤"
+INTERSECTION_BOTTOM="┬"
+INTERSECTION_TOP="┴"
+INTERSECTION_ALL="┼"
+COMMAND_OUTPUT_SEPARATOR="│"
+# Print full output of the command w or only the first line (1=full output, 0=first line only)
+FULLW=0
+# Print weather information (1=yes, 0=no)
+WEATHER=1
+# ZIP Code (For weather)
+ZIP=29617
+# Print banner (1=yes, 0=no)
+PRINTBAN=0
+# Print a custom banner (1=yes, 0=no)
+CUSTBAN=0
+# Text to be displayed in custom banner (backticks and \ escapes are allowed, use a backslash followed by the letter n to end a line(\ n without the space))
+CUSTBANTEXT=""
+# Which banner to print (BANLINUX, BANLINUXBIG, BANUBUNTU, BANANDROID, or BANMACOSX)
+BANNER=BANUBUNTU
+# Custom Command Section (Set CUSTOM to 1 to activate, 0 to disable)
+CUSTOM=0
+CUSTOM_HEADER="Custom Command Stats"
+CUSTOM_TITLE="Custom Command"
+CUSTOM_COMMAND="echo Custom Command Output"
