@@ -196,7 +196,7 @@ LAN_IP=`ifconfig eth0 | grep 'inet addr:' | cut -d: -f2 | awk '{ print $1}'`
 KERNEL_VERSION=`uname -r`
 if [ $FULLW == 1 ];
 then
-    USER_STATS=`w | awk '{if( NR ==1 )print substr($a,2); else print; }'`
+    USER_STATS=`w | awk '{if( NR == 1 )print substr($a,2); else print "" substr($a,1); }'`
 else
     USER_STATS=`w | awk 'NR==1' | cut -c2-`
 fi
