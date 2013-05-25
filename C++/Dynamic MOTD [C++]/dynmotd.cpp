@@ -25,7 +25,7 @@ using namespace std;
 int main()
 {
      //Begin loading information
-     std::cout << "Loading..." << endl <<;
+     std::cout << "Loading..." << endl;
      system("reset");
 
      //Load Settings
@@ -116,13 +116,13 @@ int main()
 
      //Get RAM size in kB
      //MEMSIZE=`cat /proc/meminfo | grep MemTotal | awk {'print $2'}`
-     //printf ("total RAM   : %5.1f MB" << endl <<, si.totalram / megabyte);
+     //printf ("total RAM   : %5.1f MB" << endl << <<, si.totalram / megabyte);
      string ram_size;
      ram_size = "RAM";
 
      //Get current users, jobs, login times, and locations
      //USERSTATS=`w`
-     /*printf ("system uptime : %ld days, %ld:%02ld:%02ld" << endl <<,
+     /*printf ("system uptime : %ld days, %ld:%02ld:%02ld" << endl << <<,
      si.uptime / day, (si.uptime % day) / hour,
      (si.uptime % hour) / minute, si.uptime % minute);*/
      string user_stats;
@@ -143,7 +143,7 @@ int main()
 
      //Get the current number of this user's active processes
      //PROCOUNT=`ps -Afl | wc -l`
-     //printf ("process count : %d" << endl <<, si.procs);
+     //printf ("process count : %d" << endl << <<, si.procs);
      string process_count;
      process_count = (uname_system_info.procs);
 
@@ -185,38 +185,37 @@ int main()
      custom_command = "echo -e Custom Command";
 
      string custom_command_output;
-     custom_command_output = system(custom_command);
+     custom_command_output = system("custom_command");
 
      //Finished!
      std::cout << "Done!";
      system("reset");
 
      //Print the loaded information
-     std::cout << "" << cyan << ":=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=[ " << red_bold << "System Stats" << cyan << " ]=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:" << endl <<
-             "" << cyan << ":   " << white_bold << "Date/Time" << cyan << " = " << green_bold << datetime << ""
-             "" << cyan << ":    " << white_bold << "Hostname" << cyan << " = " << green_bold << hostname << endl
-             "" << cyan << ":     " << white_bold << "WLAN IP" << cyan << " = " << green_bold << wlan_ip << endl
-             "" << cyan << ":      " << white_bold << "LAN IP" << cyan << " = " << green_bold << lan_ip << endl
-             "" << cyan << ":      " << white_bold << "Kernel" << cyan << " = " << green_bold << kernel_version << endl
-             "" << cyan << ":      " << white_bold << "Memory" << cyan << " = " << green_bold << ram_size << " mB" << endl <<
-             "" << cyan << ":       " << white_bold << "Stats" << cyan << " = " << green_bold << user_stats << endl
-             "" << cyan << ":=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:[ " << red_bold << "User Stats" << cyan << " ]:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:" << endl <<
-             "" << cyan << ":    " << white_bold << "Username" << cyan << " = " << green_bold << username << endl
-             "" << cyan << ":  " << white_bold << "Last Login" << cyan << " = " << green_bold << last_login << endl
-             "" << cyan << ":        " << white_bold << "Home" << cyan << " = " << green_bold << home_path << endl
-             "" << cyan << ":   " << white_bold << "Processes" << cyan << " = " << green_bold << process_count << " of " << process_limit << endl;
+     std::cout << cyan << ":=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=[ " << red_bold << "System Stats" << cyan << " ]=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:" << endl <<
+             cyan << ":   " << white_bold << "Date/Time" << cyan << " = " << green_bold << datetime << endl <<
+             cyan << ":    " << white_bold << "Hostname" << cyan << " = " << green_bold << hostname << endl <<
+             cyan << ":     " << white_bold << "WLAN IP" << cyan << " = " << green_bold << wlan_ip << endl <<
+             cyan << ":      " << white_bold << "LAN IP" << cyan << " = " << green_bold << lan_ip << endl <<
+             cyan << ":      " << white_bold << "Kernel" << cyan << " = " << green_bold << kernel_version << endl <<
+             cyan << ":      " << white_bold << "Memory" << cyan << " = " << green_bold << ram_size << " mB" << endl <<
+             cyan << ":       " << white_bold << "Stats" << cyan << " = " << green_bold << user_stats << endl <<
+             cyan << ":=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:[ " << red_bold << "User Stats" << cyan << " ]:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:" << endl <<
+             cyan << ":    " << white_bold << "Username" << cyan << " = " << green_bold << username << endl <<
+             cyan << ":  " << white_bold << "Last Login" << cyan << " = " << green_bold << last_login << endl <<
+             cyan << ":        " << white_bold << "Home" << cyan << " = " << green_bold << home_path << endl <<
+             cyan << ":   " << white_bold << "Processes" << cyan << " = " << green_bold << process_count << " of " << process_limit << endl;
 
-     std::cout << "" << cyan << ":=:=:=:=:=:=:=:=:=:=:=:=:=:[ " << red_bold << "Internet Weather Stats" << cyan << " ]:=:=:=:=:=:=:=:=:=:=:=:=:=:" << endl <<
-             "" << cyan << ":    " << white_bold << "Location" << cyan << " = " << green_bold << weather_location << ", " << weather_zip << endl
-             "" << cyan << ":        " << white_bold << "Temp" << cyan << " = " << green_bold << weather_temperature << endl
-             "" << cyan << ":     " << white_bold << "Weather" << cyan << " = " << green_bold << weather_conditions << endl
-             "" << cyan << ":         " << white_bold << "Sky" << cyan << " = " << green_bold << weather_sky_conditions << endl;
+     std::cout << cyan << ":=:=:=:=:=:=:=:=:=:=:=:=:=:[ " << red_bold << "Internet Weather Stats" << cyan << " ]:=:=:=:=:=:=:=:=:=:=:=:=:=:" << endl <<
+             cyan << ":    " << white_bold << "Location" << cyan << " = " << green_bold << weather_location << ", " << weather_zip << endl <<
+             cyan << ":        " << white_bold << "Temp" << cyan << " = " << green_bold << weather_temperature << endl <<
+             cyan << ":     " << white_bold << "Weather" << cyan << " = " << green_bold << weather_conditions << endl <<
+             cyan << ":         " << white_bold << "Sky" << cyan << " = " << green_bold << weather_sky_conditions << endl;
 
-     std::cout << "" << cyan << ":=:=:=:=:=:=:=:=:=:=:=:=:=:=[ " << red_bold << custom_header << cyan << " ]=:=:=:=:=:=:=:=:=:=:=:=:=:=:" << endl <<
-             "" << cyan << ":    " << white_bold << custom_command << cyan << " = " << green_bold << custom_command_output << endl
+     std::cout << cyan << ":=:=:=:=:=:=:=:=:=:=:=:=:=:=[ " << red_bold << custom_header << cyan << " ]=:=:=:=:=:=:=:=:=:=:=:=:=:=:" << endl <<
+             cyan << ":    " << white_bold << custom_command << cyan << " = " << green_bold << custom_command_output << endl;
 
-             std::cout << "" << cyan << ":=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:[]:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:"
-             "" << color_default << endl << endl;
+     std::cout << cyan << ":=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:[]:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:" << endl <<
+             color_default << endl << endl;
      return 0;
 }
-
