@@ -12,7 +12,9 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
+      <itemPath>curses.h</itemPath>
       <itemPath>dynmotd.cpp</itemPath>
+      <itemPath>term.h</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
                    displayName="Test Files"
@@ -39,8 +41,20 @@
         <rebuildPropChanged>false</rebuildPropChanged>
       </toolsSet>
       <compileType>
+        <linkerTool>
+          <linkerAddLib>
+            <pElem>lib</pElem>
+          </linkerAddLib>
+          <linkerLibItems>
+            <linkerOptionItem>-dynamic</linkerOptionItem>
+          </linkerLibItems>
+        </linkerTool>
       </compileType>
+      <item path="curses.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="dynmotd.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="term.h" ex="false" tool="3" flavor2="0">
       </item>
     </conf>
     <conf name="Release" type="1">
@@ -64,7 +78,11 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
+      <item path="curses.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="dynmotd.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="term.h" ex="false" tool="3" flavor2="0">
       </item>
     </conf>
   </confs>
