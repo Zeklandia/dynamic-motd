@@ -9,19 +9,20 @@ CND_DISTDIR=dist
 # Debug configuration
 CND_PLATFORM_Debug=GNU-Linux-x86
 CND_ARTIFACT_DIR_Debug=dist/Debug/GNU-Linux-x86
-CND_ARTIFACT_NAME_Debug=dynamic_motd__c___
-CND_ARTIFACT_PATH_Debug=dist/Debug/GNU-Linux-x86/dynamic_motd__c___
+CND_ARTIFACT_NAME_Debug=dynmotd
+CND_ARTIFACT_PATH_Debug=dist/Debug/GNU-Linux-x86/dynmotd
 CND_PACKAGE_DIR_Debug=dist/Debug/GNU-Linux-x86/package
-CND_PACKAGE_NAME_Debug=dynamicmotd[c++].tar
-CND_PACKAGE_PATH_Debug=dist/Debug/GNU-Linux-x86/package/dynamicmotd[c++].tar
+CND_PACKAGE_NAME_Debug=dynmotd[C++].tar
+CND_PACKAGE_PATH_Debug=dist/Debug/GNU-Linux-x86/package/dynmotd[C++].tar
 # Release configuration
 CND_PLATFORM_Release=GNU-Linux-x86
 CND_ARTIFACT_DIR_Release=dist/Release/GNU-Linux-x86
-CND_ARTIFACT_NAME_Release=dynamic_motd__c___
-CND_ARTIFACT_PATH_Release=dist/Release/GNU-Linux-x86/dynamic_motd__c___
+CND_ARTIFACT_NAME_Release=dynmotd
+CND_ARTIFACT_PATH_Release=dist/Release/GNU-Linux-x86/dynmotd
 CND_PACKAGE_DIR_Release=dist/Release/GNU-Linux-x86/package
-CND_PACKAGE_NAME_Release=dynamicmotd[c++].tar
-CND_PACKAGE_PATH_Release=dist/Release/GNU-Linux-x86/package/dynamicmotd[c++].tar
+CND_PACKAGE_NAME_Release=dynmotd[C++].tar
+CND_PACKAGE_PATH_Release=dist/Release/GNU-Linux-x86/package/dynmotd[C++].tar
+OUTPUT_PATH=dist/Debug/GNU-Linux-x86/dynmotd
 #
 # include compiler specific variables
 #
