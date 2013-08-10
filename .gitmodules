@@ -1,0 +1,9 @@
+[submodule "Dynamic-MOTD-CPP"]
+	path = Dynamic-MOTD-CPP
+	url = git://github.com/Zeklandia/Dynamic-MOTD-CPP.git
+[submodule "Dynamic-MOTD-Java"]
+	path = Dynamic-MOTD-Java
+	url = git://github.com/Zeklandia/Dynamic-MOTD-Java.git
+[submodule "Dynamic-MOTD-Shell"]
+	path = Dynamic-MOTD-Shell
+	url = git://github.com/Zeklandia/Dynamic-MOTD-Shell.git
