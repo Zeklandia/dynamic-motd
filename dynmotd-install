@@ -1,0 +1,83 @@
+#!/bin/bash
+# Part of raspi-config http://github.com/asb/raspi-config
+#
+# See LICENSE file for copyright and license details
+
+calc_wt_size() {
+  WT_HEIGHT=12
+  WT_WIDTH=$(tput cols)
+
+  if [ -z "$WT_WIDTH" ] || [ "$WT_WIDTH" -lt 60 ]; then
+    WT_WIDTH=80
+  fi
+  if [ "$WT_WIDTH" -gt 178 ]; then
+    WT_WIDTH=120
+  fi
+  WT_MENU_HEIGHT=$(($WT_HEIGHT-8))
+}
+
+do_about() {
+  whiptail --msgbox "\
+This is the installation script for Dynamic-MOTD.\
+Select a version to install and this script will\
+take care of the rest.\
+" 12 64 1
+}
+
+install_cpp() {
+
+wget -O /usr/local/bin/dynmotd-cpp https://github.com/Zeklandia/Dynamic-MOTD-CPP/raw/master/src/dynamic_motd_cpp
+ln -s /usr/local/bin/dynmotd-cpp /usr/bin/dynmotd-cpp
+whiptail --msgbox "Installation of Dynamic-MOTD-C++ Complete!" 8 32 2
+
+}
+
+install_java() {
+
+wget -O /usr/local/bin/dynmotd-java.jar https://raw.github.com/Zeklandia/Dynamic-MOTD-Java/master/src/dynmotd-java.jar
+wget -O /usr/local/bin/dynmotd-java https://raw.github.com/Zeklandia/Dynamic-MOTD-Java/master/src/dynmotd-java
+ln -s /usr/local/bin/dynmotd-java /usr/bin/dynmotd-java
+whiptail --msgbox "Installation of Dynamic-MOTD-Java Complete!" 8 32 2
+
+}
+
+install_shell() {
+
+wget -O /usr/local/bin/dynmotd-shell https://raw.github.com/Zeklandia/Dynamic-MOTD-Shell/master/dynmotd
+ln -s /usr/local/bin/dynmotd-shell /usr/bin/dynmotd-shell
+whiptail --msgbox "Installation of Dynamic-MOTD-Shell Complete!" 8 32 2
+
+}
+
+do_finish() {
+
+exit 0
+
+}
+
+#
+# Interactive use loop
+#
+calc_wt_size
+while true; do
+  FUN=$(whiptail --title "Dynamic-MOTD Installation Script" --menu "Installation Types" $WT_HEIGHT $WT_WIDTH $WT_MENU_HEIGHT --cancel-button Done --ok-button Install \
+    "1 C++" "A compiled C++ binary" \
+    "2 Java" "A Java .jar file" \
+    "3 Shell" "A Shell script" \
+    "4 About This Script" "Information about this installation script" \
+    3>&1 1>&2 2>&3)
+  RET=$?
+  if [ $RET -eq 1 ]; then
+    do_finish
+  elif [ $RET -eq 0 ]; then
+    case "$FUN" in
+      1\ *) install_cpp ;;
+      2\ *) install_java ;;
+      3\ *) install_shell ;;
+      4\ *) do_about ;;
+      *) whiptail --msgbox "Whoops! Report this as an issue" 8 48 1 ;;
+    esac || whiptail --msgbox "There was an error installing $FUN" 8 48 1
+  else
+    exit 1
+  fi
+done
