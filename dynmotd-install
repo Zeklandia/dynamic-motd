@@ -3,6 +3,13 @@
 #
 # See LICENSE file for copyright and license details
 
+if [ $(id -u) -ne 0 ]; then
+  whiptail --msgbox "\
+This script needs to be run as root. \
+\nPlease use '$ sudo dynmotd-install'" 12 40 1
+  exit 1
+fi
+
 calc_wt_size() {
   WT_HEIGHT=12
   WT_WIDTH=$(tput cols)
@@ -18,7 +25,7 @@ calc_wt_size() {
 
 do_about() {
   whiptail --msgbox "\
-This is the installation script for Dynamic-MOTD.\
+This is the installation script for Dynamic-MOTD. \
 Select a version to install and this script will\
 take care of the rest.\
 " 12 64 1
