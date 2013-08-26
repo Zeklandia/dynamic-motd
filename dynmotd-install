@@ -35,6 +35,7 @@ install_cpp() {
 
 wget -O /usr/local/bin/dynmotd-cpp https://github.com/Zeklandia/Dynamic-MOTD-CPP/raw/master/src/dynamic_motd_cpp
 ln -s /usr/local/bin/dynmotd-cpp /usr/bin/dynmotd-cpp
+chmod +x /usr/local/bin/dynmotd-cpp
 whiptail --msgbox "Installation of Dynamic-MOTD-C++ Complete!" 8 32 2
 
 }
@@ -44,6 +45,8 @@ install_java() {
 wget -O /usr/local/bin/dynmotd-java.jar https://raw.github.com/Zeklandia/Dynamic-MOTD-Java/master/src/dynmotd-java.jar
 wget -O /usr/local/bin/dynmotd-java https://raw.github.com/Zeklandia/Dynamic-MOTD-Java/master/src/dynmotd-java
 ln -s /usr/local/bin/dynmotd-java /usr/bin/dynmotd-java
+chmod +x /usr/local/bin/dynmotd-java
+chmod +x /usr/local/bin/dynmotd-java.jar
 whiptail --msgbox "Installation of Dynamic-MOTD-Java Complete!" 8 32 2
 
 }
@@ -52,6 +55,7 @@ install_shell() {
 
 wget -O /usr/local/bin/dynmotd-shell https://raw.github.com/Zeklandia/Dynamic-MOTD-Shell/master/dynmotd
 ln -s /usr/local/bin/dynmotd-shell /usr/bin/dynmotd-shell
+chmod +x /usr/local/bin/dynmotd-shell
 whiptail --msgbox "Installation of Dynamic-MOTD-Shell Complete!" 8 32 2
 
 }
