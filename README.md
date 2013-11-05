@@ -21,8 +21,8 @@ Script to display basic information about the computer to which you are logging 
 
 --------------------------------------------------------------------------------
 
-Development is currently in-progress for C++, Java, and Shell versions of the script.
+Development is currently in-progress for the C++ and Java versions of the script.
 
 --------------------------------------------------------------------------------
 
-![alt tag](https://lh6.googleusercontent.com/-t-FB_1SNc2Q/UgpP6d0DPPI/AAAAAAAADyc/0-In7jSbK90/w991-h557-no/dynmotd.png)
+![alt tag](https://lh3.googleusercontent.com/-6_xLdxeuhsg/Unhg3_JUrDI/AAAAAAAAETY/IFYhwQjYMms/w817-h497-no/dynmotd-shell.png)
