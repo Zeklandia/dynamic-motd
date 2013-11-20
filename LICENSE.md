@@ -1,1 +1,1 @@
-This program and its subordinates (Dynamic-MOTD-CPP, Dynamic-MOTD-Java, Dynamic-MOTD-Shell) are licensed under the GNU General Public License v2 (GPL2).
+This program and its related programs are licensed under the GNU General Public License Revision 2 (gpl2).
