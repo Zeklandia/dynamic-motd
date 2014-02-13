@@ -53,7 +53,7 @@ whiptail --msgbox "Installation of Dynamic-MOTD-Java Complete!" 8 32 2
 
 install_shell() {
 
-wget -O /usr/local/bin/dynmotd-shell https://raw.github.com/Zeklandia/Dynamic-MOTD-Shell/master/dynmotd
+wget -O /usr/local/bin/dynmotd-shell https://raw.github.com/Zeklandia/Dynamic-MOTD-Shell/master/dynmotd-shell
 ln -s /usr/local/bin/dynmotd-shell /usr/bin/dynmotd-shell
 chmod +x /usr/local/bin/dynmotd-shell
 whiptail --msgbox "Installation of Dynamic-MOTD-Shell Complete!" 8 32 2
